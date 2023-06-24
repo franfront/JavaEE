@@ -6,5 +6,29 @@
 </head>
 <body>
 <h3>Formulario de usuarios</h3>
+<form action="/webapp-form/registro" method="post">
+
+    <div>
+        <label for="username">Username</label>
+        <div><input type="text" name="username" id="username" required></div>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <div><input type="password" name="password" id="password" required></div>
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <div><input type="email" name="email" id="email" required></div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Enviar">
+        </div>
+    </div>
+
+</form>
 </body>
 </html>
