@@ -24,10 +24,82 @@
     </div>
 
     <div>
+        <label for="pais">Pais</label>
+        <div>
+            <select name="pais" id="pais">
+                <option value="AR">Argentina</option>
+                <option value="FR">Francia</option>
+                <option value="AL">Alemania</option>
+                <option value="ES">España</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label for="lenguajes"></label>
+        <div>
+            <select name="lenguajes" id="lenguajes" multiple>
+                <option value="Java">Java</option>
+                <option value="C#">C#</option>
+                <option value="PHP">PHP</option>
+                <option value="Python">Python</option>
+                <option value="C++">C++</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label>Roles</label>
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_ADMIN">
+            <label>Administrador</label>
+        </div>
+
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_USER">
+            <label>Usuario</label>
+        </div>
+
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_MODERATOR">
+            <label>Moderador</label>
+        </div>
+    </div>
+
+
+
+    <div>
+        <label>Idiomas</label>
+        <div>
+            <input type="radio" name="idioma" value="es">
+            <label>Español</label>
+            <input type="radio" name="idioma" value="fr">
+            <label>Frances</label>
+            <input type="radio" name="idioma" value="en">
+            <label>Ingles</label>
+            <input type="radio" name="idioma" value="br">
+            <label>Portugues</label>
+
+
+        </div>
+    </div>
+
+    <div>
+        <label for="habilitar">Habilitar</label>
+        <div>
+            <input type="checkbox" name="habilitar" id="habilitar" checked>
+        </div>
+    </div>
+
+
+
+    <div>
         <div>
             <input type="submit" value="Enviar">
         </div>
     </div>
+
+    <input type="hidden" value="12345" name="secreto">
 
 </form>
 </body>
