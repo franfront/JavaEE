@@ -67,6 +67,7 @@ public class FomServlet extends HttpServlet {
 
 
 
+            if (errores.isEmpty()) {
         try (PrintWriter out = resp.getWriter()) { // para escribir la respuesta
 
             out.println("<!DOCTYPE html>");
@@ -81,7 +82,6 @@ public class FomServlet extends HttpServlet {
 
             out.println("<ul>");
 
-            if (errores.isEmpty()) {
 
                 out.println("<li>Username: " + username + "</li>");
                 out.println("<li>Password: " + password + "</li>");
@@ -103,11 +103,6 @@ public class FomServlet extends HttpServlet {
                 out.println("<li>Idioma: " + idioma + "</li>");
                 out.println("<li>Habilitado: " + habilitar + "</li>");
                 out.println("<li>Secreto: " + secreto + "</li>");
-            } else {
-                errores.forEach(e -> out.println("<li>" + e + "</li>"));
-            }
-
-            out.println("<p> <a href=\"/webapp-form\">Volver al formulario</a> </p>");
 
             out.println("</ul>");
 
@@ -117,5 +112,15 @@ public class FomServlet extends HttpServlet {
 
             out.println("</html>");
         }
+            } else {
+                /*errores.forEach(e -> out.println("<li>" + e + "</li>"));
+            }
+
+            out.println("<p> <a href=\"/webapp-form\">Volver al formulario</a> </p>");
+            */
+
+                req.setAttribute("errores", errores);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp); // redireccionamos a la pagina de errores
+            }
     }
 }
