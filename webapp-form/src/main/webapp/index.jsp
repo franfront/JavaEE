@@ -22,7 +22,7 @@
 %>
 <ul class="list-group list-group-flush">
     <% for(String error : errors.values()) { %>
-    <li class="list-group-item text-bg-danger"><%= error %></li>
+    <li class="alert alert-danger"><%= error %></li>
     <% } %>
 </ul>
 
@@ -33,7 +33,7 @@
 
     <div class="mb-3">
         <label for="username" class="form-label fs-4">Username</label>
-        <div><input type="text" name="username" id="username" placeholder="Tu Username" class="form-control"></div>
+        <div><input type="text" name="username" id="username" placeholder="Tu Username" class="form-control" value="${param.username}"></div>
         <%
             if(errors != null && errors.containsKey("username")) {
                 out.println("<small  class='form-text text-danger'>" + errors.get("username") + "</small>");
@@ -52,7 +52,7 @@ out.println("<small  class='form-text text-danger'>" + errors.get("password") + 
 
     <div class="mb-3">
         <label for="email" class="form-label fs-4l">Email</label>
-        <div><input type="email" name="email" id="email" class="form-control"></div>
+        <div><input type="email" name="email" id="email" class="form-control value="${param.email}"></div>
          <%
                     if(errors != null && errors.containsKey("email")) {
 out.println("<small  class='form-text text-danger'>" + errors.get("email") + "</small>");                              }
@@ -65,10 +65,10 @@ out.println("<small  class='form-text text-danger'>" + errors.get("email") + "</
 
             <select name="pais" id="pais" class="form-select" aria-label="Selecciona Un País">
                 <option value="" selected>Selecciona un País</option>
-                <option value="AR">Argentina</option>
-                <option value="FR">Francia</option>
-                <option value="AL">Alemania</option>
-                <option value="ES">España</option>
+                <option value="AR" ${param.pais.equals("AR")? "selected": ""}>Argentina</option>
+                <option value="FR" ${param.pais.equals("FR")? "selected": ""}>Francia</option>
+                <option value="AL" ${param.pais.equals("AL")? "selected": ""}>Alemania</option>
+                <option value="ES" ${param.pais.equals("ES")? "selected": ""}>España</option>
             </select>
         </div>
         <%
@@ -79,15 +79,15 @@ out.println("<small  class='form-text text-danger'>" + errors.get("pais") + "</s
     </div>
 
     <div class="mb-3">
-        <label for="lenguajes" class="form-label fs-4"></label>
+        <label for="lenguajes" class="form-label fs-4">Lenguajes</label>
 
         <div>
             <select name="lenguajes" id="lenguajes" size="6" multiple class="form-select">
-                <option value="Java">Java</option>
-                <option value="C#">C#</option>
-                <option value="PHP">PHP</option>
-                <option value="Python">Python</option>
-                <option value="C++">C++</option>
+                <option value="Java" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("Java")).get()?"selected":""}>Java</option>
+                <option value="C#" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("C#")).get()?"selected":""}>C#</option>
+                <option value="PHP" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("PHP")).get()?"selected":""}>PHP</option>
+                <option value="Python" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("Python")).get()?"selected":""}>Python</option>
+                <option value="C++" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("C++")).get()?"selected":""}>C++</option>
             </select>
         </div>
         <%                  if (errors != null && errors.containsKey("lenguajes")) {
@@ -100,16 +100,16 @@ out.println("<small  class='form-text text-danger'>" + errors.get("lenguajes") +
           <div aria-label="Seleccion Rol">
             <label class="form-label fs-4">Roles</label>
             <div class="w-100"></div>
-            <div class="form-check form-check-inline">
-              <input type="checkbox" name="roles" value="ROLE_ADMIN" class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="checkbox" name="roles" value="ROLE_ADMIN" class="form-check-input" ${paramValues.roles.stream().anyMatch(v -> v.equals("ROLE_ADMIN")).get()?"checked":""}>
               <label class="form-check-label">Administrador</label>
             </div>
-            <div class="form-check form-check-inline">
-              <input type="checkbox" name="roles" value="ROLE_USER" checked class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="checkbox" name="roles" value="ROLE_USER" class="form-check-input" ${paramValues.roles.stream().anyMatch(v -> v.equals("ROLE_USER")).get()?"checked":""}>
               <label class="form-check-label">Usuario</label>
             </div>
-            <div class="form-check form-check-inline">
-              <input type="checkbox" name="roles" value="ROLE_MODERATOR" class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="checkbox" name="roles" value="ROLE_MODERATOR" class="form-check-input" ${paramValues.roles.stream().anyMatch(v -> v.equals("ROLE_MODERATOR")).get()?"checked":""}>
               <label class="form-check-label">Moderador</label>
             </div>
           </div>
@@ -126,16 +126,16 @@ out.println("<small  class='form-text text-danger'>" + errors.get("roles") + "</
           <div aria-label="Seleccion Idioma"">
             <label class="form-label fs-4">Idiomas</label>
             <div class="w-100"></div>
-            <div class="form-check form-check-inline">
-              <input type="radio" name="idioma" value="es" class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="radio" name="idioma" value="es" class="form-check-input" ${param.idioma.equals("es")? "checked": ""}>
               <label class="form-check-label">Español</label>
             </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" name="idioma" value="en" class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="radio" name="idioma" value="en" class="form-check-input" ${param.idioma.equals("en")? "checked": ""}>
               <label class="form-check-label">Inglés</label>
             </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" name="idioma" value="fr" class="form-check-input">
+            <div class="form-check form-check-inline col-sm-2">
+              <input type="radio" name="idioma" value="fr" class="form-check-input" ${param.idioma.equals("fr")? "checked": ""}>
               <label class="form-check-label">Frances</label>
             </div>
           </div>
@@ -148,7 +148,7 @@ out.println("<small  class='form-text text-danger'>" + errors.get("idioma") + "<
     </div>
 
      <div class="mb-3 align-items-center">
-          <label for="habilitar" class="form-label fs-4 me-4">Habilitar</label>
+          <label for="habilitar" class="form-label fs-4 me-4 col-sm-2">Habilitar</label>
           <div class="form-check form-switch form-check-inline">
             <input type="checkbox" name="habilitar" id="habilitar" checked class="form-check-input">
           </div>
