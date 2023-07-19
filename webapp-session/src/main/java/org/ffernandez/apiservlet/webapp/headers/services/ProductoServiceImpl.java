@@ -5,6 +5,7 @@ import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductoServiceImpl implements ProductoService {
     @Override
@@ -13,5 +14,12 @@ public class ProductoServiceImpl implements ProductoService {
                 new Producto(2L, "mesa escritorio", "oficina", 150000),
                 new Producto(3L, "teclado", "computación", 20000),
                 new Producto(4L, "silla de oficina", "oficina", 100000));
+    }
+
+    @Override
+    public Optional<Producto> findById(Long id) {
+        return listarProductos().stream()
+                .filter(producto -> producto.getId().equals(id))
+                .findAny();
     }
 }
