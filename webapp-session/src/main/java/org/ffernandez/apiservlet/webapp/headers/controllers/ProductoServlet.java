@@ -25,6 +25,8 @@ public class ProductoServlet extends HttpServlet {
 
         Optional<String> usernameOptional = auth.getUsername(req);
 
+        String mensajeRequest = (String) req.getAttribute("mensaje"); // se crea con cada request
+        String mensajeApp = (String) req.getServletContext().getAttribute("mensaje"); // se crea una sola vez
 
         resp.setContentType("text/html;charset=UTF-8"); // el tipo de contenido que vamos a devolver
 
@@ -73,7 +75,8 @@ public class ProductoServlet extends HttpServlet {
 
             out.println("</table>");
 
-
+            out.println("<p>" + mensajeApp + "</p>");
+            out.println("<p>" + mensajeRequest + "</p>");
             out.println("</body>");
 
             out.println("</html>");

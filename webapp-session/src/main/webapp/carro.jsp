@@ -18,24 +18,28 @@ Carro carro = (Carro) session.getAttribute("carro");
 
     <%} else{ %>
 
-    <table>
+
+
+        <form name="formcarro" action="<%=request.getContextPath()%>/actualizar-carro" method="post">
+        <table>
+
         <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
+                <th>id</th>
+                <th>nombre</th>
+                <th>precio</th>
+                <th>cantidad</th>
+                <th>total</th>
+                <th>borrar</th>
+            </tr>
 
-        </tr>
-
-        <%for(ItemCarro item : carro.getItems()){%>
-
+          <%for(ItemCarro item : carro.getItems()){%>
         <tr>
             <td><%=item.getProducto().getId()%></td>
             <td><%=item.getProducto().getNombre()%></td>
             <td><%=item.getProducto().getPrecio()%></td>
-            <td><%=item.getCantidad()%></td>
+            <td><input type="text" size="4" name="cant_<%=item.getProducto().getId()%>" value="<%=item.getCantidad()%>" /></td>
             <td><%=item.getTotal()%></td>
+            <td><input type="checkbox" value="<%=item.getProducto().getId()%>" name="deleteProductos" /></td>
         </tr>
 
         <%}%>
@@ -45,7 +49,10 @@ Carro carro = (Carro) session.getAttribute("carro");
             <td> <%=carro.getTotal()%>  </td>
         </tr>
 
+
     </table>
+    <a href="javascript:document.formcarro.submit();">Actualizar</a>
+    </form>
 
     <%}%>
 
