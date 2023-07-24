@@ -15,7 +15,7 @@ import org.ffernandez.apiservlet.webapp.headers.services.ProductoServiceImpl;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/agregar-carro")
+@WebServlet("/carro/agregar")
 public class AgregarCarroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,6 +34,6 @@ public class AgregarCarroServlet extends HttpServlet {
 
         }
 
-        resp.sendRedirect(req.getContextPath() + "/ver-carro");
+        resp.sendRedirect(req.getContextPath() + "/carro/ver");
     }
 }

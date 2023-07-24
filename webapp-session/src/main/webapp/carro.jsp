@@ -20,7 +20,7 @@ Carro carro = (Carro) session.getAttribute("carro");
 
 
 
-        <form name="formcarro" action="<%=request.getContextPath()%>/actualizar-carro" method="post">
+        <form name="formcarro" action="<%=request.getContextPath()%>/carro/actualizar" method="post">
         <table>
 
         <tr>
