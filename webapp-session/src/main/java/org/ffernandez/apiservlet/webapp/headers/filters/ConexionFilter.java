@@ -4,6 +4,7 @@ package org.ffernandez.apiservlet.webapp.headers.filters;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import org.ffernandez.apiservlet.webapp.headers.services.ServiceJdbcException;
 import org.ffernandez.apiservlet.webapp.headers.util.ConexionBD;
 
 import java.io.IOException;
@@ -24,13 +25,14 @@ public class ConexionFilter implements Filter {
                 request.setAttribute("conn", conn);
                 chain.doFilter(request, response);
                 conn.commit();
-            } catch (Exception e) {
+            } catch (SQLException | ServiceJdbcException e) {
                 conn.rollback();
-                throw new RuntimeException(e);
+                ((HttpServletResponse) response).sendError(500, "Error en la conexion a la base de datos");
+                e.printStackTrace();
+
             }
-        } catch (SQLException e) {
-            ((HttpServletResponse) response).sendError(500, "Error en la conexion a la base de datos");
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }

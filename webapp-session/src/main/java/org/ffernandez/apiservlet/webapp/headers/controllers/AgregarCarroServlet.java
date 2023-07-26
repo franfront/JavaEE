@@ -22,7 +22,7 @@ public class AgregarCarroServlet extends HttpServlet {
         Long id = Long.parseLong(req.getParameter("id"));
         ProductoService service = new ProductoServiceImpl();
 
-        Optional<Producto> producto = service.findById(id);
+        Optional<Producto> producto = service.porId(id);
 
         if(producto.isPresent()) {
             ItemCarro item = new ItemCarro(1, producto.get());

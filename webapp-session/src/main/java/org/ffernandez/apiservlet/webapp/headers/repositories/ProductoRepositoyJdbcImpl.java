@@ -2,10 +2,7 @@ package org.ffernandez.apiservlet.webapp.headers.repositories;
 
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,18 +29,22 @@ public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
         return productos;
     }
 
-    private static Producto getProducto(ResultSet rs) throws SQLException {
-        Producto p = new Producto();
-        p.setId(rs.getLong("id"));
-        p.setNombre(rs.getString("nombre"));
-        p.setPrecio(rs.getInt("precio"));
-        p.setTipo(rs.getString("categoria"));
-        return p;
-    }
 
     @Override
     public Producto porId(Long id) throws SQLException {
-        return null;
+
+        Producto producto = null;
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT p.*, c.nombre FROM productos as p " +
+                " inner join categorias as c ON (p.categoria_id = c.id) WHERE p.id = ?")){
+            stmt.setLong(1, id);
+            try(ResultSet rs = stmt.executeQuery()){ // se ejecuta la consulta
+                if(rs.next()){
+                    producto = getProducto(rs);
+                }
+            }
+        }
+
+        return producto;
     }
 
     @Override
@@ -54,5 +55,13 @@ public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
     @Override
     public void eliminar(Long id) throws SQLException {
 
+    }
+    private static Producto getProducto(ResultSet rs) throws SQLException {
+        Producto p = new Producto();
+        p.setId(rs.getLong("id"));
+        p.setNombre(rs.getString("nombre"));
+        p.setPrecio(rs.getInt("precio"));
+        p.setTipo(rs.getString("categoria"));
+        return p;
     }
 }

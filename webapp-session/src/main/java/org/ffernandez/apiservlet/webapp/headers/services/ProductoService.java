@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface ProductoService {
 
     List<Producto> listarProductos();
-    Optional<Producto> findById(Long id);
+    Optional<Producto> porId(Long id);
 }
