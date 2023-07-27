@@ -10,6 +10,7 @@ import org.ffernandez.apiservlet.webapp.headers.services.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,10 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductoService service = new ProductoServiceImpl();
+        Connection conn = (Connection) req.getAttribute("conn");
+
+        ProductoService service = new ProductoServiceJdbcImpl(conn);
+
         List<Producto> productos = service.listarProductos();
 
         LoginService auth = new LoginServiceSessionImpl();
