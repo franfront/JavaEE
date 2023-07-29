@@ -29,63 +29,10 @@ public class ProductoServlet extends HttpServlet {
 
         Optional<String> usernameOptional = auth.getUsername(req);
 
-        String mensajeRequest = (String) req.getAttribute("mensaje"); // se crea con cada request
-        String mensajeApp = (String) req.getServletContext().getAttribute("mensaje"); // se crea una sola vez
+        req.setAttribute("productos", productos);
+        req.setAttribute("username", usernameOptional);
 
-        resp.setContentType("text/html;charset=UTF-8"); // el tipo de contenido que vamos a devolver
-
-        try (PrintWriter out = resp.getWriter()) { // para escribir la respuesta
-
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset=\"UTF-8\">");
-            out.println("<title>Listado de Productos</title>");
-            out.println("</head>");
-
-            out.println("<body>");
-            out.println("<h1>Listado de Productos!</h1>");
-
-            if(usernameOptional.isPresent()) {
-                out.println("<h2>Bienvenido "+ usernameOptional.get() +"</h2>");
-            }
-
-
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<th>Id</th>");
-            out.println("<th>Nombre</th>");
-            out.println("<th>Tipo</th>");
-
-            if(usernameOptional.isPresent()) {
-                out.println("<th>Precio</th>");
-                out.println("<th>Agregar</th>");
-            }
-
-            out.println("</tr>");
-
-            productos.forEach(p -> {
-                out.println("<tr>");
-                out.println("<td>" + p.getId() + "</td>");
-                out.println("<td>" + p.getNombre() + "</td>");
-                out.println("<td>" + p.getTipo() + "</td>");
-                if(usernameOptional.isPresent()) {
-                    out.println("<td>" + p.getPrecio() + "</td>");
-                    out.println("<td><a href= '"+ req.getContextPath()  + "/carro/agregar?id=" + p.getId() + "' >Agregar al carrito</a></td>");
-                }
-                out.println("</tr>");
-            });
-
-            out.println("</table>");
-
-            out.println("<p>" + mensajeApp + "</p>");
-            out.println("<p>" + mensajeRequest + "</p>");
-            out.println("</body>");
-
-            out.println("</html>");
-
-        }
+        getServletContext().getRequestDispatcher("/listar.jsp").forward(req, resp);
 
     }
 }

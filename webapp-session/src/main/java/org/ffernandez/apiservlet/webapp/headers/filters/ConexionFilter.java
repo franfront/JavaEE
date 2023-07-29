@@ -27,7 +27,7 @@ public class ConexionFilter implements Filter {
                 conn.commit();
             } catch (SQLException | ServiceJdbcException e) {
                 conn.rollback();
-                ((HttpServletResponse) response).sendError(500, "Error en la conexion a la base de datos");
+                ((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error en la conexion a la base de datos");
                 e.printStackTrace();
 
             }
