@@ -1,9 +1,11 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
+import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
@@ -50,10 +52,38 @@ public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
     @Override
     public void guardar(Producto producto) throws SQLException {
 
+        String sql;
+        if(producto.getId() != null && producto.getId() > 0) {
+            sql = "UPDATE productos SET nombre = ?, precio = ?, sku= ?, categoria_id = ? WHERE id = ?";
+        } else {
+            sql = "INSERT INTO productos(nombre, precio, sku, categoria_id, fecha_registro) VALUES(?, ?, ?, ?, ?)";
+        }
+
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, producto.getNombre());
+            stmt.setInt(2, producto.getPrecio());
+            stmt.setString(3, producto.getSku());
+            stmt.setLong(4, producto.getCategoria().getId());
+
+                if(producto.getId() != null && producto.getId() > 0) {
+                    stmt.setLong(5, producto.getId());
+                } else {
+                    stmt.setDate(5, Date.valueOf(producto.getFechaRegistro()));
+                }
+
+                stmt.executeUpdate(); // se ejecuta la consulta
+
+        }
+
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
 
     }
     private static Producto getProducto(ResultSet rs) throws SQLException {
@@ -61,7 +91,15 @@ public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
         p.setId(rs.getLong("id"));
         p.setNombre(rs.getString("nombre"));
         p.setPrecio(rs.getInt("precio"));
-        p.setTipo(rs.getString("categoria"));
+
+        p.setFechaRegistro(rs.getDate("fecha_registro").toLocalDate());
+
+        // pasamos el nombre y el id de la categoria
+        Categoria c = new Categoria();
+        c.setId(rs.getLong("categoria_id"));
+        c.setNombre(rs.getString("categoria"));
+
+        p.setCategoria(c);
         return p;
     }
 }
