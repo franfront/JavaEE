@@ -1,5 +1,6 @@
 package org.ffernandez.apiservlet.webapp.headers.services;
 
+import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
 import java.lang.reflect.Array;
@@ -21,5 +22,25 @@ public class ProductoServiceImpl implements ProductoService {
         return listarProductos().stream()
                 .filter(producto -> producto.getId().equals(id))
                 .findAny();
+    }
+
+    @Override
+    public void guardar(Producto producto) {
+
+    }
+
+    @Override
+    public void eliminar(Long id) {
+
+    }
+
+    @Override
+    public List<Categoria> listarCategoria() {
+        return null;
+    }
+
+    @Override
+    public Optional<Categoria> porIdCategoria(Long id) {
+        return Optional.empty();
     }
 }
