@@ -45,7 +45,7 @@ public class ProductoFormServlet extends HttpServlet {
         String fechaStr = req.getParameter("fecha_registro");
         Long categoriaId;
         try{
-            categoriaId = Long.valueOf(req.getParameter("categoria_id"));
+            categoriaId = Long.valueOf(req.getParameter("categoria"));
         } catch (NumberFormatException e) {
             categoriaId = 0L;
         }
@@ -56,6 +56,8 @@ public class ProductoFormServlet extends HttpServlet {
         }
         if(sku == null || sku.isBlank()) {
             errores.put("sku", "El sku es requerido");
+        } else if(sku.length() > 10) {
+            errores.put("sku", "El sku debe tener maximo 10 caracteres");
         }
         if(fechaStr == null || fechaStr.isBlank()) {
             errores.put("fecha_registro", "La fecha es requerida");

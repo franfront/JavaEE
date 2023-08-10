@@ -19,7 +19,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
         <div>
             <input type="text" name="nombre" id="nombre">
         </div>
-        <%if(errores != null && errores.containsKey("nombre"))%>
+        <%if(errores != null && errores.containsKey("nombre")){%>
         <div style="color:red;"><%=errores.get("nombre")%></div>
 
         <%}%>
@@ -30,7 +30,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
         <div>
             <input type="number" name="precio" id="precio">
         </div>
-        <%if(errores != null && errores.containsKey("precio"))%>
+        <%if(errores != null && errores.containsKey("precio")){%>
                 <div style="color:red;"><%=errores.get("precio")%></div>
 
                 <%}%>
@@ -41,7 +41,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
         <div>
             <input type="text" name="sku" id="sku">
         </div>
-        <%if(errores != null && errores.containsKey("sku"))%>
+        <%if(errores != null && errores.containsKey("sku")){%>
                 <div style="color:red;"><%=errores.get("sku")%></div>
 
                 <%}%>
@@ -52,7 +52,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
         <div>
             <input type="date" name="fecha_registro" id="fecha_registro">
         </div>
-        <%if(errores != null && errores.containsKey("fecha_registro"))%>
+        <%if(errores != null && errores.containsKey("fecha_registro")){%>
                 <div style="color:red;"><%=errores.get("fecha_registro")%></div>
 
                 <%}%>
@@ -68,7 +68,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 <%}%>
             </select>
         </div>
-        <%if(errores != null && errores.containsKey("categoria"))%>
+        <%if(errores != null && errores.containsKey("categoria")){%>
                 <div style="color:red;"><%=errores.get("categoria")%></div>
 
                 <%}%>
