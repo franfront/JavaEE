@@ -28,6 +28,7 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
         <% if(username.isPresent()){%>
         <th>Precio</th>
         <th>Agregar</th>
+        <th>Editar</th>
         <% } %>
     </tr>
     <% for(Producto p : productos) {%>
@@ -38,6 +39,8 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
         <% if(username.isPresent()){%>
         <td><%= p.getPrecio() %></td>
         <td><a href="<%=request.getContextPath()%>/carro/agregar?id=<%=p.getId() %>">Agregar</a></td>
+        <td><a href="<%=request.getContextPath()%>/productos/form?id=<%=p.getId() %>">Editar</a></td>
+
         <% } %>
     </tr>
     <% } %>
