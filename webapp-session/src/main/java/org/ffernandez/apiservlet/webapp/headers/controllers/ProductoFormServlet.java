@@ -24,7 +24,6 @@ public class ProductoFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection conn = (Connection) req.getAttribute("conn");
         ProductoService service = new ProductoServiceJdbcImpl(conn);
-        req.setAttribute("categorias", service.listarCategoria());
         Long id;
 
         // validamos que el id sea un numero
@@ -47,6 +46,7 @@ public class ProductoFormServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        req.setAttribute("categorias", service.listarCategoria());
         req.setAttribute("producto", producto);
         getServletContext().getRequestDispatcher("/form.jsp").forward(req, resp);
 
@@ -68,50 +68,69 @@ public class ProductoFormServlet extends HttpServlet {
         String sku = req.getParameter("sku");
         String fechaStr = req.getParameter("fecha_registro");
         Long categoriaId;
-        try{
+        try {
             categoriaId = Long.valueOf(req.getParameter("categoria"));
         } catch (NumberFormatException e) {
             categoriaId = 0L;
         }
 
         Map<String, String> errores = new HashMap<>();
-        if(nombre == null || nombre.isBlank()) {
+        if (nombre == null || nombre.isBlank()) {
             errores.put("nombre", "El nombre es requerido");
         }
-        if(sku == null || sku.isBlank()) {
+        if (sku == null || sku.isBlank()) {
             errores.put("sku", "El sku es requerido");
-        } else if(sku.length() > 10) {
+        } else if (sku.length() > 10) {
             errores.put("sku", "El sku debe tener maximo 10 caracteres");
         }
-        if(fechaStr == null || fechaStr.isBlank()) {
+        if (fechaStr == null || fechaStr.isBlank()) {
             errores.put("fecha_registro", "La fecha es requerida");
         }
-        if(precio.equals(0)) {
+        if (precio.equals(0)) {
             errores.put("precio", "El precio es requerido");
         }
-        if(categoriaId.equals(0L)) {
+        if (categoriaId.equals(0L)) {
             errores.put("categoria", "La categoria es requerida");
         }
 
-        if(errores.isEmpty()) {
-            LocalDate fecha = LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            Producto producto = new Producto();
-            producto.setNombre(nombre);
-            producto.setPrecio(precio);
-            producto.setPrecio(precio);
-            producto.setFechaRegistro(fecha);
+        LocalDate fecha;
+        try{
+        fecha = LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (Exception e) {
+        fecha = null;
+    }
+        Long id;
+        try{
+            id = Long.valueOf(req.getParameter("id"));
+        } catch (NumberFormatException e) {
+            id = 0L;
+        }
 
-            Categoria categoria = new Categoria();
-            categoria.setId(categoriaId);
-            producto.setCategoria(categoria);
+        Producto producto = new Producto();
+        producto.setId(id);
+        producto.setNombre(nombre);
+        producto.setPrecio(precio);
+        producto.setPrecio(precio);
+        producto.setFechaRegistro(fecha);
+
+        Categoria categoria = new Categoria();
+        categoria.setId(categoriaId);
+        producto.setCategoria(categoria);
+
+
+        if(errores.isEmpty()) {
 
             service.guardar(producto);
             resp.sendRedirect(req.getContextPath() + "/productos");
         } else{
             req.setAttribute("errores", errores);
-            doGet(req, resp);
+            req.setAttribute("categorias", service.listarCategoria());
+            req.setAttribute("producto", producto);
+            getServletContext().getRequestDispatcher("/form.jsp").forward(req, resp);
+
 
         }
+
 
 
     }
