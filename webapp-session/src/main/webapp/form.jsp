@@ -45,7 +45,7 @@ String fecha = producto.getFechaRegistro() != null ? producto.getFechaRegistro()
     <div>
         <label for="sku">Sku</label>
         <div>
-            <input type="text" name="sku" id="sku" value="<%=producto.getSku() != null? producto.getSku(): ""%>">
+            <input type="text" name="sku" id="sku" value="<%=producto.getSku() != null? producto.getSku():""%>">
         </div>
         <%if(errores != null && errores.containsKey("sku")){%>
                 <div style="color:red;"><%=errores.get("sku")%></div>

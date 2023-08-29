@@ -66,6 +66,7 @@ public class ProductoFormServlet extends HttpServlet {
         }
 
         String sku = req.getParameter("sku");
+
         String fechaStr = req.getParameter("fecha_registro");
         Long categoriaId;
         try {
@@ -109,6 +110,7 @@ public class ProductoFormServlet extends HttpServlet {
         Producto producto = new Producto();
         producto.setId(id);
         producto.setNombre(nombre);
+        producto.setSku(sku);
         producto.setPrecio(precio);
         producto.setPrecio(precio);
         producto.setFechaRegistro(fecha);
