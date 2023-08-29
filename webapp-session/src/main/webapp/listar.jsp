@@ -29,6 +29,7 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
         <th>Precio</th>
         <th>Agregar</th>
         <th>Editar</th>
+        <th>Eliminar</th>
         <% } %>
     </tr>
     <% for(Producto p : productos) {%>
@@ -40,6 +41,9 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
         <td><%= p.getPrecio() %></td>
         <td><a href="<%=request.getContextPath()%>/carro/agregar?id=<%=p.getId() %>">Agregar</a></td>
         <td><a href="<%=request.getContextPath()%>/productos/form?id=<%=p.getId() %>">Editar</a></td>
+        <td><a onclick="return confirm('¿Está seguro de eliminar el producto?');"
+        href="<%=request.getContextPath()%>/productos/eliminar?id=<%=p.getId() %>">Eliminar</a></td>
+
 
         <% } %>
     </tr>
