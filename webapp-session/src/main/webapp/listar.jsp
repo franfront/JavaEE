@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*, org.ffernandez.apiservlet.webapp.headers.models.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 List<Producto> productos = (List<Producto>) request.getAttribute("productos");
 Optional<String> username = (Optional<String>) request.getAttribute("username");
@@ -16,10 +17,10 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
 <body>
 
 <h1>Listado de productos</h1>
-<% if(username.isPresent()){%>
+<c:if test="${username.isPresent()}">
 <div>Hola <%=username.get()%>, bienvenido!</div>
 <p><a href="<%=request.getContextPath()%>/productos/form">Crear [+]</a></p>
-<% } %>
+</c:if>
 <table>
     <tr>
         <th>Id</th>
