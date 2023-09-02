@@ -36,9 +36,9 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
     <% for(Producto p : productos) {%>
     <c:forEach items="${productos}" var="p">
     <tr>
-        <td><c:out value="{p.Id()}"/></td>
+        <td><c:out value="{p.id()}"/></td>
 
-        <td><%= p.getNombre() %></td>
+        <td><c:out value="{p.nombre()}"/></td>
         <td><%= p.getCategoria().getNombre() %></td>
         <% if(username.isPresent()){%>
         <td><%= p.getPrecio() %></td>
