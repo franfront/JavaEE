@@ -18,24 +18,26 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
 
 <h1>Listado de productos</h1>
 <c:if test="${username.isPresent()}">
-<div>Hola <%=username.get()%>, bienvenido!</div>
-<p><a href="<%=request.getContextPath()%>/productos/form">Crear [+]</a></p>
+<div>Hola <c:out value="{username.get()}"/>, bienvenido!</div>
+<p><a href="<c:out value="${pageContext.request.contextpath}"/>/productos/form">Crear [+]</a></p>
 </c:if>
 <table>
     <tr>
         <th>Id</th>
         <th>Nombre</th>
         <th>Tipo</th>
-        <% if(username.isPresent()){%>
+        <c:if teset="{username.isPresent()}">
         <th>Precio</th>
         <th>Agregar</th>
         <th>Editar</th>
         <th>Eliminar</th>
-        <% } %>
+        </c:if>
     </tr>
     <% for(Producto p : productos) {%>
+    <c:forEach items="${productos}" var="p">
     <tr>
-        <td><%= p.getId() %></td>
+        <td><c:out value="{p.Id()}"/></td>
+
         <td><%= p.getNombre() %></td>
         <td><%= p.getCategoria().getNombre() %></td>
         <% if(username.isPresent()){%>
@@ -48,7 +50,8 @@ String mensajeApp = (String) getServletContext().getAttribute("mensaje");
 
         <% } %>
     </tr>
-    <% } %>
+
+    </c:forEach>
 
 
 </table>
