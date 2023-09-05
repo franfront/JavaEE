@@ -12,8 +12,8 @@
 
 <h1>Listado de productos</h1>
 <c:if test="${username.isPresent()}">
-<div>Hola <c:out value="{username.get()}"/>, bienvenido!</div>
-<p><a href="<c:out value="${pageContext.request.contextpath}"/>/productos/form">Crear [+]</a></p>
+<div>Hola ${username.get()}, bienvenido!</div>
+<p><a href="${pageContext.request.contextpath}/productos/form">Crear [+]</a></p>
 </c:if>
 <table>
     <tr>
@@ -30,16 +30,16 @@
     <% for(Producto p : productos) {%>
     <c:forEach items="${productos}" var="p">
     <tr>
-        <td><c:out value="{p.id()}"/></td>
+        <td>{p.id()}</td>
 
-        <td><c:out value="{p.nombre()}"/></td>
-        <td><c:out value="{p.categoria.nombre}"/></td>
+        <td>{p.nombre()}</td>
+        <td>{p.categoria.nombre}</td>
         <c:if teset="{username.isPresent()}">
-        <td><c:out value="{p.precio}" /></td>
-        <td><a href="${pageContext.request.contextpath}/carro/agregar?id=<c:out value="{p.id()}" />">Agregar</a></td>
-        <td><a href="${pageContext.request.contextpath}/productos/form?id=<c:out value="{p.id()}"  />">Editar</a></td>
+        <td>{p.precio}</td>
+        <td><a href="${pageContext.request.contextpath}/carro/agregar?id={p.id()}">Agregar</a></td>
+        <td><a href="${pageContext.request.contextpath}/productos/form?id={p.id()}">Editar</a></td>
         <td><a onclick="return confirm('¿Está seguro de eliminar el producto?');"
-        href="${pageContext.request.contextpath}/productos/eliminar?id=<c:out value="{p.id()}"/>">Eliminar</a></td>
+        href="${pageContext.request.contextpath}/productos/eliminar?id={p.id()}">Eliminar</a></td>
 
 
          </c:if>
