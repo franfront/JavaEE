@@ -31,7 +31,6 @@
     <c:forEach items="${productos}" var="p">
     <tr>
         <td>${p.id}</td>
-
         <td>${p.nombre}</td>
         <td>${p.categoria.nombre}</td>
         <c:if test="${username.present}">
