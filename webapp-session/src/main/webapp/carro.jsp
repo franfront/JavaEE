@@ -6,13 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Carro de Compras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
 <h1>Carro de Compras</h1>
 <c:choose>
 
 <c:when test="${sessionScope.carro == null || sessionScope.carro.items.isEmpty()}">
-        <p>No hay productos en el carro</p>
+        <div class="alert alert-warning">No hay productos en el carro</div>
 
 </c:when>
 <c:otherwise>
@@ -21,7 +22,7 @@
 
 
         <form name="formcarro" action="${pageContext.request.contextPath}/carro/actualizar" method="post">
-        <table>
+        <table class="table table-primary table-striped">
 
         <tr>
                 <th>id</th>
@@ -51,14 +52,15 @@
 
 
     </table>
-    <a href="javascript:document.formcarro.submit();">Actualizar</a>
+    <a class= "btn btn-sm btn-primary" href="javascript:document.formcarro.submit();">Actualizar</a>
     </form>
 
 </c:otherwise>
    </c:choose>
-
-    <p><a href="${pageContext.request.contextPath}/productos">Seguir comprando</a></p>
-    <p><a href="${pageContext.request.contextPath}/index.html">Volver</a></p>
+    <div>
+    <a class= "btn btn-sm btn-success" href="${pageContext.request.contextPath}/productos">Seguir comprando</a>
+    <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.html">Volver</a>
+    </div>
 
 
 </body>
