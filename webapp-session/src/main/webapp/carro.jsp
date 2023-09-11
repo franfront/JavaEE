@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
 <h1>Carro de Compras</h1>
 <c:choose>
 
@@ -46,7 +47,7 @@
         </c:forEach>
 
         <tr>
-            <td colspan="4" style="text-align: right">Total</td>
+            <td colspan="5" style="text-align: right">Total</td>
             <td> ${sessionScope.carro.total}</td>
         </tr>
 
@@ -57,11 +58,11 @@
 
 </c:otherwise>
    </c:choose>
-    <div>
+    <div class="my-2">
     <a class= "btn btn-sm btn-success" href="${pageContext.request.contextPath}/productos">Seguir comprando</a>
     <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.html">Volver</a>
     </div>
 
-
+</div>
 </body>
 </html>
