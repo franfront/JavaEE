@@ -3,15 +3,8 @@ import="java.time.format.*"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Formulario de productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
+<jsp:include page="layout/header.jsp" />
+
 <h1>Formulario de productos</h1>
 <form action="${pageContext.request.contextPath}/productos/form" method="post">
     <div class="row mb-2">
@@ -84,6 +77,4 @@ import="java.time.format.*"%>
     </div>
     <input type="hidden" name="id" value="${producto.id}">
 </form>
-</div>
-</body>
-</html>
+<jsp:include page="layout/footer.jsp" />

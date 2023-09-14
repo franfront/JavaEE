@@ -2,15 +2,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Listado de productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
+<jsp:include page="layout/header.jsp" />
+
 <h1>Listado de productos</h1>
 <c:if test="${username.present}">
 <div class="alert alert-info">Hola ${username.get()}, bienvenido!</div>
@@ -50,8 +43,6 @@
 
 </table>
 <p>${applicationScope.mensaje}</p>
-<p><${requestScope.mensaje}</p>
+<p>${requestScope.mensaje}</p>
 
-</div>
-</body>
-</html>
+<jsp:include page="layout/footer.jsp" />

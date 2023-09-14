@@ -1,15 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Carro de Compras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
+<jsp:include page="layout/header.jsp" />
+
 <h1>Carro de Compras</h1>
 <c:choose>
 
@@ -63,6 +56,4 @@
     <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.html">Volver</a>
     </div>
 
-</div>
-</body>
-</html>
+<jsp:include page="layout/footer.jsp" />
