@@ -37,13 +37,15 @@ public class LoginServlet extends HttpServlet {
 
                 out.println("<body>");
                 out.println("<h1>Bienvenido "+ usernameOptional.get() +" has iniciado sesión</h1>");
-                out.println("<p><a href= '"+ req.getContextPath()  + "/index.html' >Volver al inicio</a></p>");
+                out.println("<p><a href= '"+ req.getContextPath()  + "/index.jsp' >Volver al inicio</a></p>");
                 out.println("<p><a href= '"+ req.getContextPath()  + "/logout' >Cerrar sesión</a></p>");
                 out.println("</body>");
 
                 out.println("</html>");
             }
         } else {
+            req.setAttribute("title", req.getAttribute("title") + " - Iniciar sesión");
+
             getServletContext().getRequestDispatcher( "/login.jsp").forward(req, resp);
         }
 

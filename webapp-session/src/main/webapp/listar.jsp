@@ -4,7 +4,7 @@
 
 <jsp:include page="layout/header.jsp" />
 
-<h1>Listado de productos</h1>
+<h3>${title}</h3>
 <c:if test="${username.present}">
 <div class="alert alert-info">Hola ${username.get()}, bienvenido!</div>
 <p><a class= "btn btn-primary"  href="${pageContext.request.contextPath}/productos/form">Crear [+]</a></p>

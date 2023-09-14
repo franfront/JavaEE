@@ -5,7 +5,7 @@ import="java.time.format.*"%>
 
 <jsp:include page="layout/header.jsp" />
 
-<h1>Formulario de productos</h1>
+<h3>${title}</h3>
 <form action="${pageContext.request.contextPath}/productos/form" method="post">
     <div class="row mb-2">
         <label for="nombre" class="col-form-label col-sm-2" >Nombre</label>

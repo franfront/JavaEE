@@ -3,7 +3,7 @@
 
 <jsp:include page="layout/header.jsp" />
 
-<h1>Carro de Compras</h1>
+<h3>${title}</h3>
 <c:choose>
 
 <c:when test="${sessionScope.carro == null || sessionScope.carro.items.isEmpty()}">
@@ -53,7 +53,7 @@
    </c:choose>
     <div class="my-2">
     <a class= "btn btn-sm btn-success" href="${pageContext.request.contextPath}/productos">Seguir comprando</a>
-    <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.html">Volver</a>
+    <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.jsp">Volver</a>
     </div>
 
 <jsp:include page="layout/footer.jsp" />

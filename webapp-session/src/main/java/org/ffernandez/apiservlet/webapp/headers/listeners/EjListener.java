@@ -32,6 +32,7 @@ public class EjListener implements ServletContextListener,
     public void requestInitialized(ServletRequestEvent sre) {
         context.log("inicializando la petición!");
         sre.getServletRequest().setAttribute("mensaje", "guardando algun valor para la petición");
+        sre.getServletRequest().setAttribute("title", "Catalogo Servlet");
 
     }
 
