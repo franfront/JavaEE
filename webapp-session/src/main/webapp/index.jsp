@@ -16,7 +16,7 @@
 
     <li class="list-group-item">
 
-        <a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a>
+        <a href="${pageContext.request.contextPath}/logout">Cerrar sesion</a>
     </li>
 
     <li class="list-group-item">

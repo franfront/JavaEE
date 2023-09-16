@@ -46,14 +46,14 @@
 
 
     </table>
-    <a class= "btn btn-sm btn-primary" href="javascript:document.formcarro.submit();">Actualizar</a>
+    <a class= "btn btn-primary" href="javascript:document.formcarro.submit();">Actualizar</a>
     </form>
 
 </c:otherwise>
    </c:choose>
     <div class="my-2">
-    <a class= "btn btn-sm btn-success" href="${pageContext.request.contextPath}/productos">Seguir comprando</a>
-    <a class= "btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/index.jsp">Volver</a>
+    <a class= "btn btn btn-success" href="${pageContext.request.contextPath}/productos">Seguir comprando</a>
+    <a class= "btn btn btn-secondary" href="${pageContext.request.contextPath}/index.jsp">Volver</a>
     </div>
 
 <jsp:include page="layout/footer.jsp" />
