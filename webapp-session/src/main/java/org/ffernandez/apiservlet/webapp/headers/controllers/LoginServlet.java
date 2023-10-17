@@ -3,18 +3,20 @@ package org.ffernandez.apiservlet.webapp.headers.controllers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
 import org.ffernandez.apiservlet.webapp.headers.services.LoginService;
 import org.ffernandez.apiservlet.webapp.headers.services.LoginServiceSessionImpl;
+import org.ffernandez.apiservlet.webapp.headers.services.UsuarioService;
+import org.ffernandez.apiservlet.webapp.headers.services.UsuarioServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet({"/login", "/login.html"})
 public class LoginServlet extends HttpServlet {
 
-    final static String USERNAME = "admin";
-    final static String PASSWORD = "12345678";
 
 
     @Override
@@ -58,7 +60,12 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (username.equals(USERNAME) && password.equals(PASSWORD)) {
+        UsuarioService service = new UsuarioServiceImpl((Connection) req.getAttribute("conn")) ;
+
+        Optional<Usuario> usuarioOptional = service.login(username, password);
+
+
+        if (usuarioOptional.isPresent()) {
 
             HttpSession session = req.getSession();
             session.setAttribute("username", username);

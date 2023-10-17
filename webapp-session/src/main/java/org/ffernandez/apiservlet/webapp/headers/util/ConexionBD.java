@@ -10,6 +10,7 @@ public class ConexionBD {
     private static String password = "prueba02";
 
     public static Connection getConection() throws SQLException {
+        
         return DriverManager.getConnection(url, username, password);
     }
 }

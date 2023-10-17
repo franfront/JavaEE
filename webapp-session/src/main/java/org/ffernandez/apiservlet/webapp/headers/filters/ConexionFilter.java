@@ -5,7 +5,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.ffernandez.apiservlet.webapp.headers.services.ServiceJdbcException;
-import org.ffernandez.apiservlet.webapp.headers.util.ConexionBD;
+import org.ffernandez.apiservlet.webapp.headers.util.ConexionBDDS;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class ConexionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        try(Connection conn = ConexionBD.getConection()){ // inicializa la conexion
+        try(Connection conn = ConexionBDDS.getConection()){ // inicializa la conexion
 
             if(conn.getAutoCommit()){
                 conn.setAutoCommit(false);
