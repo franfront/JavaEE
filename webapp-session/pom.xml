@@ -22,7 +22,7 @@
             <dependency>
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-api</artifactId>
-                <version>10.0.0</version>
+                <version>9.0.0</version>
                 <scope>provided</scope>
             </dependency>
         <dependency>
@@ -42,8 +42,11 @@
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>4.0.1.SP1</version>
+        </dependency>
 
 
     </dependencies>

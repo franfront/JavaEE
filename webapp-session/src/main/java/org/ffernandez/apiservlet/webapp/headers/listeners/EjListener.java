@@ -45,10 +45,10 @@ public class EjListener implements ServletContextListener,
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         context.log("inicializando la sesión http!");
-        Carro carro = new Carro(); // creamos el carro cuando se crea la sesión
-        HttpSession session = se.getSession();
-        session.setAttribute("carro", carro);
-
+        //Carro carro = new Carro(); // creamos el carro cuando se crea la sesión
+//        HttpSession session = se.getSession();
+//        session.setAttribute("carro", carro);
+        // se maneja automatico por el CDI
     }
 
     @Override
