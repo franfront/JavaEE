@@ -1,5 +1,8 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
@@ -8,12 +11,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
+@ApplicationScoped // para que se cree una sola instancia de esta clase
+
 public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
+
+    // Injectar por atributo
+    @Inject
+    @Named("conn")
     private Connection conn;
 
-    public ProductoRepositoyJdbcImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public List<Producto> listar() throws SQLException {

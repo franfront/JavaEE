@@ -1,5 +1,8 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
 
 import java.sql.Connection;
@@ -8,12 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+@ApplicationScoped
 public class UsuarioRepositoryImpl implements UsuarioRepository {
+
+    @Inject
+    @Named("conn")
     private Connection conn;
 
-    public UsuarioRepositoryImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public List<Usuario> listar() throws SQLException {
