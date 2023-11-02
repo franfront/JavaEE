@@ -22,13 +22,16 @@ public class ProductoServlet extends HttpServlet {
     @Named("default")
     private ProductoService service;
 
+    @Inject
+    private LoginService auth;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
         List<Producto> productos = service.listarProductos();
 
-        LoginService auth = new LoginServiceSessionImpl();
+
 
         Optional<String> usernameOptional = auth.getUsername(req);
 
