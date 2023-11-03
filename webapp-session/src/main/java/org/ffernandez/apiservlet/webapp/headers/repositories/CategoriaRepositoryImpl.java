@@ -1,8 +1,9 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
+
+import org.ffernandez.apiservlet.webapp.headers.configs.MysqlConn;
+import org.ffernandez.apiservlet.webapp.headers.configs.Repositorio;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 
 import java.sql.*;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@ApplicationScoped
+@Repositorio
 public class CategoriaRepositoryImpl implements Repository<Categoria> {
 
 
@@ -19,7 +20,7 @@ public class CategoriaRepositoryImpl implements Repository<Categoria> {
 
     // Injectar mediante constructor
     @Inject
-    public CategoriaRepositoryImpl(@Named("conn") Connection conn) {
+    public CategoriaRepositoryImpl(@MysqlConn Connection conn) {
         this.conn = conn;
     }
 

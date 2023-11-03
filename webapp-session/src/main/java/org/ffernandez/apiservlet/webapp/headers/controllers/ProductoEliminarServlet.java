@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 import org.ffernandez.apiservlet.webapp.headers.services.ProductoService;
 import org.ffernandez.apiservlet.webapp.headers.services.ProductoServiceJdbcImpl;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class ProductoEliminarServlet extends HttpServlet {
 
     @Inject
-    @Named("default")
+    @ProductoServicesPrin
     private ProductoService service;
 
     @Override

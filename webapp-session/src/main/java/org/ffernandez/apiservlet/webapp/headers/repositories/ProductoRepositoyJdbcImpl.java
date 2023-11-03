@@ -2,23 +2,25 @@ package org.ffernandez.apiservlet.webapp.headers.repositories;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
+
+import org.ffernandez.apiservlet.webapp.headers.configs.MysqlConn;
+import org.ffernandez.apiservlet.webapp.headers.configs.Repositorio;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.List;
 
 
-@ApplicationScoped // para que se cree una sola instancia de esta clase
-
+//@ApplicationScoped para que se cree una sola instancia de esta clase
+@Repositorio
 public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
 
     // Injectar por atributo
     @Inject
-    @Named("conn")
+    @MysqlConn
     private Connection conn;
 
 

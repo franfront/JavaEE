@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Optional;
 
-@Alternative // para que CDI sepa que es la alternativa a la implementación por defecto
+//@Alternative  para que CDI sepa que es la alternativa a la implementación por defecto
 public class LoginServiceCookieImpl implements LoginService {
     @Override
     public Optional<String> getUsername(HttpServletRequest req) {

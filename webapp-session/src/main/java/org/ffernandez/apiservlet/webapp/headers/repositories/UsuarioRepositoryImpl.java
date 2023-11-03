@@ -3,6 +3,8 @@ package org.ffernandez.apiservlet.webapp.headers.repositories;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.ffernandez.apiservlet.webapp.headers.configs.MysqlConn;
+import org.ffernandez.apiservlet.webapp.headers.configs.Repositorio;
 import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
 
 import java.sql.Connection;
@@ -12,11 +14,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-@ApplicationScoped
+@Repositorio
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Inject
-    @Named("conn")
+    @MysqlConn
     private Connection conn;
 
 

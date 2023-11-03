@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
 import org.ffernandez.apiservlet.webapp.headers.models.Carro;
 import org.ffernandez.apiservlet.webapp.headers.models.ItemCarro;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class AgregarCarroServlet extends HttpServlet {
 
     @Inject
-    @Named("default")
+    @ProductoServicesPrin
     private ProductoService service;
 
     @Inject
