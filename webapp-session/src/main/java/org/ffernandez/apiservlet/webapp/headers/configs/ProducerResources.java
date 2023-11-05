@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
@@ -32,4 +33,9 @@ public class ProducerResources {
 
         return ds.getConnection();
     }
+    public void close(@Disposes @MysqlConn Connection conn) throws SQLException {
+        conn.close();
+        System.out.println("Cerrando conexion");
+    }
+
 }
