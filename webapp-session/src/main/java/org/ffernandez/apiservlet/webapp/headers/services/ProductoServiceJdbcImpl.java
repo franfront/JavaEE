@@ -2,11 +2,10 @@ package org.ffernandez.apiservlet.webapp.headers.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
-import org.ffernandez.apiservlet.webapp.headers.repositories.Repository;
+import org.ffernandez.apiservlet.webapp.headers.repositories.CrudRepository;
 
 
 import java.sql.SQLException;
@@ -18,10 +17,10 @@ import java.util.Optional;
 public class ProductoServiceJdbcImpl implements ProductoService{
 
     @Inject
-    private Repository<Producto> repojdbc;
+    private CrudRepository<Producto> repojdbc;
 
     @Inject
-    private Repository<Categoria> repoCateogriajdbc;
+    private CrudRepository<Categoria> repoCateogriajdbc;
 
 
     @Override

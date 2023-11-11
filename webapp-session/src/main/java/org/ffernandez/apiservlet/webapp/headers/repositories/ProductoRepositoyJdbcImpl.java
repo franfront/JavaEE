@@ -1,10 +1,11 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
 
 import org.ffernandez.apiservlet.webapp.headers.configs.MysqlConn;
-import org.ffernandez.apiservlet.webapp.headers.configs.Repositorio;
+import org.ffernandez.apiservlet.webapp.headers.configs.Repository;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
 
@@ -12,17 +13,33 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 
 //@ApplicationScoped para que se cree una sola instancia de esta clase
-@Repositorio
-public class ProductoRepositoyJdbcImpl implements Repository<Producto>{
+@Repository
+public class ProductoRepositoyJdbcImpl implements CrudRepository<Producto> {
+
+    @Inject
+    private Logger log;
+
 
     // Injectar por atributo
     @Inject
     @MysqlConn
     private Connection conn;
 
+
+
+    @PostConstruct // se ejecuta despues de que se crea el objeto
+    public void inicializar(){
+        log.info("Inicializando el beans " + this.getClass().getName());
+    }
+
+    @PreDestroy // se ejecuta antes de que se destruya el objeto
+    public void destruir(){
+        log.info("Destruyendo el beans " + this.getClass().getName());
+    }
 
     @Override
     public List<Producto> listar() throws SQLException {

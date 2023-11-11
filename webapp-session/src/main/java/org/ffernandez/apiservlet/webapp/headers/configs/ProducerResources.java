@@ -6,15 +6,21 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class ProducerResources {
+
+    @Inject
+    private Logger log;
 
     @Resource(name="jdbc/mysqlDB") // name es el nombre del recurso que hemos definido en el servidor de aplicaciones
     private DataSource ds;
@@ -33,9 +39,15 @@ public class ProducerResources {
 
         return ds.getConnection();
     }
+
+    @Produces // se usa para producir un objeto
+    private Logger beanLogger(InjectionPoint injectionPoint){ // da informacion del punto de inyeccion
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName()); // devuelve el nombre de la clase
+    }
+
     public void close(@Disposes @MysqlConn Connection conn) throws SQLException {
         conn.close();
-        System.out.println("Cerrando conexion");
+        log.info("Cerrando conexion");
     }
 
 }
