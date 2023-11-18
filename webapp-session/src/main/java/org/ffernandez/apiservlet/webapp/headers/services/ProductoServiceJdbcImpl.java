@@ -3,6 +3,7 @@ package org.ffernandez.apiservlet.webapp.headers.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
+import org.ffernandez.apiservlet.webapp.headers.configs.Service;
 import org.ffernandez.apiservlet.webapp.headers.interceptors.Logging;
 import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.Producto;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@ApplicationScoped
+@Service
 @ProductoServicesPrin
 public class ProductoServiceJdbcImpl implements ProductoService{
 
@@ -25,7 +26,6 @@ public class ProductoServiceJdbcImpl implements ProductoService{
 
 
     @Override
-    @Logging
     public List<Producto> listarProductos() {
         try {
             return repojdbc.listar();
@@ -35,7 +35,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     }
 
     @Override
-    @Logging
+
     public Optional<Producto> porId(Long id) {
         try {
             return Optional.ofNullable(repojdbc.porId(id));
