@@ -16,30 +16,35 @@ import java.sql.SQLException;
 @WebFilter("/*") // se aplica a todos
 public class ConexionFilter implements Filter {
 
-    @Inject
+   /* @Inject
     @MysqlConn
-    private Connection conn;
+    private Connection conn;*/
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        try(Connection connRequest = this.conn){ // inicializa la conexion
+        /*try(Connection connRequest = this.conn){ // inicializa la conexion
 
             if(connRequest.getAutoCommit()){
                 connRequest.setAutoCommit(false);
-            }
+            }*/
+
+
+
+
             try {
 //                request.setAttribute("conn", connRequest);
                 chain.doFilter(request, response);
-                connRequest.commit();
-            } catch (SQLException | ServiceJdbcException e) {
-                connRequest.rollback();
+//                connRequest.commit();
+            } catch (ServiceJdbcException e) {
+//                connRequest.rollback();
+
                 ((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error en la conexion a la base de datos");
                 e.printStackTrace();
 
             }
-        } catch (SQLException throwables) {
+        /*} catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
     }
 }
