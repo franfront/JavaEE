@@ -7,6 +7,9 @@
        <class>
         org.ffernandez.apiservlet.webapp.headers.interceptors.LoggingInterceptor
        </class>
+        <class>
+            org.ffernandez.apiservlet.webapp.headers.interceptors.TransactionalInterceptor
+        </class>
     </interceptors>
 
 </beans>
