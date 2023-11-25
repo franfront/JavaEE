@@ -13,7 +13,7 @@ public class HibernateListar {
         EntityManager em = JpaUtil.getEntityManager();
 
         // La consulta se realiza utilizando JPQL (Java Persistence Query Language),
-        List<Cliente> clientes = em.createQuery("select c from Cliente c").getResultList(); // busca todos de la clase Cliente en la tabla clientes
+        List<Cliente> clientes = em.createQuery("select c from Cliente c", Cliente.class).getResultList(); // busca todos de la clase Cliente en la tabla clientes
 
         clientes.forEach(System.out::println);
 
