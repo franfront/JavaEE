@@ -7,7 +7,7 @@ import org.ffernandez.hibernateapp.util.JpaUtil;
 
 import java.util.Scanner;
 
-public class HibernateListarWhere {
+public class HibernateSingleResultWhere {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -17,6 +17,7 @@ public class HibernateListarWhere {
         System.out.println("Ingrese la forma de pago: ");
         String pago = sc.next();
         query.setParameter(1, pago);
+        query.setMaxResults(1); // limita la cantidad de resultados a 1
         // castea el resultado a un objeto de tipo Cliente
         Cliente cliente = (Cliente) query.getSingleResult();
         System.out.println(cliente);
