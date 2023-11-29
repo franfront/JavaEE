@@ -1,6 +1,7 @@
 package org.ffernandez.hibernateapp;
 
 import jakarta.persistence.EntityManager;
+import org.ffernandez.hibernateapp.dominio.ClienteDto;
 import org.ffernandez.hibernateapp.entity.Cliente;
 import org.ffernandez.hibernateapp.util.JpaUtil;
 
@@ -54,6 +55,34 @@ public class HibernateQL {
                 System.out.println("id: " + id2 + ", nombre: " + nombre3 + ", apellido: " + apellido2);
                 });
            // }
+
+            System.out.println("===== consulta por cliente y forma pago =====");
+
+            List<Object[]> registros2 = em.createQuery("select c, c.formaPago from Cliente c", Object[].class)
+                    .getResultList();
+
+            registros2.forEach(reg->{
+                Cliente cliente2 = (Cliente) reg[0];
+                String formaPago = (String) reg[1];
+                System.out.println("cliente: " + cliente2 + ", forma pago: " + formaPago);
+            });
+
+            System.out.println("===== consulta que puebla y devuelve un objeto entity personalizado =====");
+            clientes = em.createQuery("select new Cliente(c.nombre, c.apellido) from Cliente c", Cliente.class)
+                    .getResultList();
+
+            clientes.forEach(System.out::println);
+
+            System.out.println("===== consulta que puebla y devuelve un objeto otro personalizado =====");
+            List<ClienteDto>  clientes2 = em.createQuery("select new org.ffernandez.hibernateapp.dominio.ClienteDto(c.nombre, c.apellido) from Cliente c", ClienteDto.class)
+                    .getResultList();
+
+            clientes2.forEach(System.out::println);
+
+            System.out.println("===== consulta con nombres de clientes =====");
+            List<String> nombres = em.createQuery("select c.nombre from Cliente c", String.class)
+                    .getResultList();
+            nombres.forEach(System.out::println);
 
 
             em.close();
