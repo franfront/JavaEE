@@ -84,6 +84,99 @@ public class HibernateQL {
                     .getResultList();
             nombres.forEach(System.out::println);
 
+            System.out.println("===== consulta con nombres unicos de clientes =====");
+            nombres = em.createQuery("select distinct(c.nombre) from Cliente c", String.class)
+                    .getResultList();
+
+            nombres.forEach(System.out::println);
+
+            System.out.println("===== consulta con formas de pago unicas =====");
+            List<String> formasPago = em.createQuery("select distinct(c.formaPago) from Cliente c", String.class)
+                    .getResultList();
+            formasPago.forEach(System.out::println);
+
+            System.out.println("===== consulta con numero de formas de pago unicas =====");
+            Long cantFormasPago = em.createQuery("select count(distinct(c.formaPago)) from Cliente c", Long.class)
+                    .getSingleResult();
+            System.out.println("cantidad de formas de pago: " + cantFormasPago);
+
+            System.out.println("===== consulta con nombre y apellidos concatenados =====");
+            //List<String> nombreApellidos = em.createQuery("select concat(c.nombre, ' ', c.apellido) as nombreCompleto from Cliente c", String.class)
+            List<String> nombreApellidos = em.createQuery("select c.nombre || ' ' || c.apellido as nombreCompleto from Cliente c", String.class)
+                    .getResultList();
+            nombreApellidos.forEach(System.out::println);
+
+            System.out.println("===== consulta con nombre y apellidos concatenados en mayuscula =====");
+            nombreApellidos = em.createQuery("select upper(concat(c.nombre, ' ', c.apellido)) as nombreCompleto from Cliente c", String.class)
+                    .getResultList();
+            nombreApellidos.forEach(System.out::println);
+
+            System.out.println("===== consulta para buscar por nombre =====");
+            String param = "ep";
+            clientes = em.createQuery("select c from Cliente c where upper(c.nombre) like upper(:nombreCliente)", Cliente.class)
+                    .setParameter("nombreCliente", "%" + param + "%")
+                    .getResultList();
+            clientes.forEach(System.out::println);
+
+            System.out.println("===== consulta por rangos =====");
+            clientes = em.createQuery("select c from Cliente c where c.id between 2 and 5", Cliente.class)
+                    .getResultList();
+            clientes.forEach(System.out::println);
+
+            System.out.println("===== consulta con orden =====");
+            clientes = em.createQuery("select c from Cliente c order by c.nombre asc, c.apellido asc", Cliente.class)
+                    .getResultList();
+            clientes.forEach(System.out::println);
+
+            System.out.println("===== consulta con total de registros de la tabla =====");
+            Long totalRegistros = em.createQuery("select count(c) from Cliente c", Long.class)
+                    .getSingleResult();
+            System.out.println("total registros: " + totalRegistros);
+
+            System.out.println("===== consulta con valor minimo del id =====");
+            Long minId = em.createQuery("select min(c.id) from Cliente c", Long.class)
+                    .getSingleResult();
+            System.out.println("minimo id: " + minId);
+
+            System.out.println("===== consulta con valor maximo del id =====");
+            Long maxId = em.createQuery("select max(c.id) from Cliente c", Long.class)
+                    .getSingleResult();
+            System.out.println("maximo id: " + maxId);
+
+            System.out.println("===== consulta con nombre y su largo =====");
+            registros = em.createQuery("select c.nombre, length(c.nombre) from Cliente c", Object[].class)
+                    .getResultList();
+            registros.forEach(
+                    reg->{
+                        String nombre3 = (String) reg[0];
+                        Integer largo = (Integer) reg[1];
+                        System.out.println("nombre: " + nombre3 + ", largo: " + largo);
+                    }
+            );
+
+            System.out.println("===== consulta con el nombre mas corto ====");
+            Integer minLargoNombre = em.createQuery("select min(length(c.nombre)) from Cliente c", Integer.class)
+                    .getSingleResult();
+            System.out.println("minimo largo nombre: " + minLargoNombre);
+
+            System.out.println("===== consulta con el nombre mas largo ====");
+            Integer maxLargoNombre = em.createQuery("select max(length(c.nombre)) from Cliente c", Integer.class)
+                    .getSingleResult();
+            System.out.println("maximo largo nombre: " + maxLargoNombre);
+
+            System.out.println("===== consultas resumen funciones agregaciones count min max avg sum ====");
+            Object[] estadisticas = em.createQuery("select min(c.id), max(c.id), sum(c.id), count(c.id), avg(length(c.nombre)) from Cliente c", Object[].class)
+                    .getSingleResult();
+
+            Long min = (Long) estadisticas[0];
+            Long max = (Long) estadisticas[1];
+            Long sum = (Long) estadisticas[2];
+            Long count = (Long) estadisticas[3];
+            Double avg = (Double) estadisticas[4];
+
+            System.out.println("min: " + min + ", max: " + max + ", sum: " + sum + ", count: " + count + ", avg: " + avg);
+
+
 
             em.close();
 
