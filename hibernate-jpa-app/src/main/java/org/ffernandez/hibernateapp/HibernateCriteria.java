@@ -1,10 +1,7 @@
 package org.ffernandez.hibernateapp;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.ParameterExpression;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.ffernandez.hibernateapp.entity.Cliente;
 import org.ffernandez.hibernateapp.util.JpaUtil;
 
@@ -64,6 +61,48 @@ public class HibernateCriteria {
         clientes = em.createQuery(query).getResultList();
 
         clientes.forEach(System.out::println);
+
+        System.out.println("===== consulta where in =====");
+
+        query = cb.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+
+        query.select(from).where(from.get("nombre").in("Pepe", "Naruto"));
+        clientes = em.createQuery(query).getResultList();
+
+        clientes.forEach(System.out::println);
+
+
+        System.out.println("===== filtrar usando predicados mayor que o igual que =====");
+
+        query = cb.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+
+        //query.select(from).where(cb.ge(from.get("id"), 5)); mayor o igual que
+        query.select(from).where(cb.gt(cb.length(from.get("nombre")), 5L)); // mayor que
+        clientes = em.createQuery(query).getResultList();
+
+        clientes.forEach(System.out::println);
+
+        System.out.println("==== consulta con los predicados conjuncion and y disyuncion or =====");
+
+        query = cb.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+
+        Predicate porNombre = cb.equal(from.get("nombre"), "Pepe");
+        Predicate porPago = cb.equal(from.get("formaPago"), "debito");
+        Predicate porId = cb.ge(from.get("id"), 2);
+
+       //query.select(from).where(cb.and(porNombre, porPago));
+
+        //query.select(from).where(cb.or(porNombre, porPago));
+
+        query.select(from).where(cb.and(porId, cb.or(porPago, porNombre)));
+
+       clientes = em.createQuery(query).getResultList();
+
+       clientes.forEach(System.out::println);
+
 
         em.close();
     }
