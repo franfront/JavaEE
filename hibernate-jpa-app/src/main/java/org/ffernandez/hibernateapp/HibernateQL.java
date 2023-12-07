@@ -5,6 +5,7 @@ import org.ffernandez.hibernateapp.dominio.ClienteDto;
 import org.ffernandez.hibernateapp.entity.Cliente;
 import org.ffernandez.hibernateapp.util.JpaUtil;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HibernateQL {
@@ -176,7 +177,29 @@ public class HibernateQL {
 
             System.out.println("min: " + min + ", max: " + max + ", sum: " + sum + ", count: " + count + ", avg: " + avg);
 
+            System.out.println("===== consulta con el nombre mas corto y su largo ====");
+            registros = em.createQuery("select c.nombre, length(c.nombre) from Cliente c where " +
+                            " length(c.nombre) = (select min(length(c.nombre)) from Cliente c)", Object[].class)
+                    .getResultList();
 
+            registros.forEach(reg -> {
+                String nombre3 = (String) reg[0];
+                Integer largo = (Integer) reg[1];
+                System.out.println("nombre: " + nombre3 + ", largo: " + largo);
+            });
+
+
+            System.out.println("===== consulta para obtener el ultimo registro ====");
+            Cliente ultimoCliente = em.createQuery("select c from Cliente c where c.id = (select max(c.id) from Cliente c)", Cliente.class)
+                    .getSingleResult();
+            System.out.println("ultimo cliente: " + ultimoCliente);
+
+
+            System.out.println("===== consulta where in ====");
+            clientes = em.createQuery("select c from Cliente c where c.id in :ids", Cliente.class)
+                    .setParameter("ids", Arrays.asList(1L, 3L, 9L))
+                    .getResultList();
+            clientes.forEach(System.out::println);
 
             em.close();
 
