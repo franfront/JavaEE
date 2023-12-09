@@ -104,6 +104,62 @@ public class HibernateCriteria {
        clientes.forEach(System.out::println);
 
 
+        System.out.println("===== consultas con irder by asc desc =====");
+
+        query = cb.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+
+        query.select(from).orderBy(cb.asc(from.get("nombre")), cb.desc(from.get("apellido")));
+
+        clientes = em.createQuery(query).getResultList();
+
+        clientes.forEach(System.out::println);
+
+        System.out.println("===== consulta por id =====");
+
+        query = cb.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+
+        ParameterExpression<Long> idParam = cb.parameter(Long.class, "idParam");
+
+        query.select(from).where(cb.equal(from.get("id"), idParam));
+
+        Cliente cliente = em.createQuery(query)
+                .setParameter("idParam", 1L)
+                .getSingleResult();
+
+
+
+        System.out.println(cliente);
+
+        System.out.println("===== consulta solo el nombre de los clientes =====");
+
+        // nueva query para solo obtener el nombre de los clientes
+        CriteriaQuery<String> query2 = cb.createQuery(String.class);
+
+        from = query2.from(Cliente.class);
+        query2.select(from.get("nombre"));
+
+        List<String> nombres = em.createQuery(query2).getResultList();
+
+        nombres.forEach(System.out::println);
+
+        System.out.println("===== consulta solo el nombre de los clientes unicos =====");
+
+
+        query2 = cb.createQuery(String.class);
+
+        from = query2.from(Cliente.class);
+        query2.select(cb.upper(from.get("nombre"))).distinct(true);
+
+        nombres = em.createQuery(query2).getResultList();
+
+
+
+        nombres.forEach(System.out::println);
+
+
+
         em.close();
     }
 }
