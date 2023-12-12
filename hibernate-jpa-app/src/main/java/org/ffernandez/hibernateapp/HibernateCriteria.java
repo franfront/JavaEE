@@ -169,6 +169,58 @@ public class HibernateCriteria {
 
         nombres.forEach(System.out::println);
 
+        System.out.println("===== consulta de campos personalizados del entity cliente =====");
+
+        CriteriaQuery<Object[]> queryObject = cb.createQuery(Object[].class);
+
+        from = queryObject.from(Cliente.class);
+        queryObject.multiselect(from.get("id"), from.get("nombre"), from.get("apellido"));
+
+        List<Object[]> lista = em.createQuery(queryObject).getResultList();
+
+        lista.forEach(arr -> {
+            Long id = (Long) arr[0];
+            String nombre = (String) arr[1];
+            String apellido = (String) arr[2];
+
+            System.out.println( "Id: " +id + ", Nombre: " + nombre + ", Apellido: " + apellido);
+        });
+
+        System.out.println("===== consulta de campos personalizados del entity cliente con where =====");
+
+        queryObject = cb.createQuery(Object[].class);
+
+        from = queryObject.from(Cliente.class);
+        queryObject.multiselect(from.get("id"), from.get("nombre"), from.get("apellido")).where(cb.like(from.get("nombre"), "P%"));
+
+        lista = em.createQuery(queryObject).getResultList();
+
+        lista.forEach(arr -> {
+            Long id = (Long) arr[0];
+            String nombre = (String) arr[1];
+            String apellido = (String) arr[2];
+
+            System.out.println( "Id: " +id + ", Nombre: " + nombre + ", Apellido: " + apellido);
+        });
+
+
+        System.out.println("===== consulta de campos personalizados del entity cliente con where id =====");
+
+        queryObject = cb.createQuery(Object[].class);
+
+        from = queryObject.from(Cliente.class);
+        queryObject.multiselect(from.get("id"), from.get("nombre"), from.get("apellido")).where(cb.equal(from.get("id"), 2L));
+        Object[] registro = em.createQuery(queryObject).getSingleResult();
+
+
+        Long id = (Long) registro[0];
+        String nombre = (String) registro[1];
+        String apellido = (String) registro[2];
+
+        System.out.println( "Id: " +id + ", Nombre: " + nombre + ", Apellido: " + apellido);
+
+
+
 
         em.close();
     }
