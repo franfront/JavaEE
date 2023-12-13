@@ -219,8 +219,67 @@ public class HibernateCriteria {
 
         System.out.println( "Id: " +id + ", Nombre: " + nombre + ", Apellido: " + apellido);
 
+        System.out.println("===== contar registros de la consulta con count =====");
 
+        CriteriaQuery<Long> queryLong = cb.createQuery(Long.class);
+        from = queryLong.from(Cliente.class);
 
+        queryLong.select(cb.count(from.get("id"))); // cuenta los registros de la consulta
+
+        Long cantidad = em.createQuery(queryLong).getSingleResult();
+
+        System.out.println("Cantidad de registros: " + cantidad);
+
+        System.out.println("===== sumar datos de algun campo de la tabla");
+
+        queryLong = cb.createQuery(Long.class);
+        from = queryLong.from(Cliente.class);
+
+        queryLong.select(cb.sum(from.get("id"))); // suma los registros de la consulta
+
+        Long suma = em.createQuery(queryLong).getSingleResult();
+
+        System.out.println("Suma de registros: " + suma);
+
+        System.out.println("===== consulta con el maximo id =====");
+
+        queryLong = cb.createQuery(Long.class);
+        from = queryLong.from(Cliente.class);
+
+        queryLong.select(cb.max(from.get("id"))); // maximo id de la consulta
+
+        Long maximo = em.createQuery(queryLong).getSingleResult();
+
+        System.out.println("Maximo id: " + maximo);
+
+        System.out.println("===== consulta con el minimo id =====");
+
+        queryLong = cb.createQuery(Long.class);
+        from = queryLong.from(Cliente.class);
+
+        queryLong.select(cb.min(from.get("id"))); // maximo id de la consulta
+
+        Long minimo = em.createQuery(queryLong).getSingleResult();
+
+        System.out.println("Minimo id: " + minimo);
+
+        System.out.println("===== ejemplo varios resultados de funciones de agregacion en una consulta =====");
+
+        queryObject = cb.createQuery(Object[].class);
+        from = queryObject.from(Cliente.class);
+        queryObject.multiselect(cb.count(from.get("id"))
+                , cb.sum(from.get("id"))
+                , cb.max(from.get("id"))
+                , cb.min(from.get("id")));
+
+        registro = em.createQuery(queryObject).getSingleResult();
+
+       cantidad = (Long) registro[0];
+       suma = (Long) registro[1];
+       maximo = (Long) registro[2];
+       minimo = (Long) registro[3];
+
+        System.out.println("Cantidad: " + cantidad + ", Suma: " + suma + ", Maximo: " + maximo + ", Minimo: " + minimo);
 
         em.close();
     }
