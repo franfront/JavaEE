@@ -37,13 +37,30 @@ public class HibrenateCriteriaBusquedaDinamica {
 
         Root<Cliente> from = query.from(Cliente.class);
 
-        //
+
         List<Predicate> condiciones = new java.util.ArrayList<>();
 
         if (nombre != null && !nombre.isEmpty()) {
             condiciones.add(cb.equal(from.get("nombre"), nombre));
         }
 
+        if (apellido != null && !apellido.isEmpty()) {
+            condiciones.add(cb.equal(from.get("apellido"), apellido));
+        }
+
+        if (formaPago != null && !formaPago.equals("")) {
+            condiciones.add(cb.equal(from.get("formaPago"), formaPago));
+        }
+
+        // crea una lista de predicados con las condiciones
+        query.select(from)
+                .where(cb.and(condiciones.toArray(new Predicate[condiciones.size()])));
+
+        List<Cliente> clientes = em.createQuery(query).getResultList();
+
+        clientes.forEach(System.out::println);
+
+        em.close();
 
 
 
