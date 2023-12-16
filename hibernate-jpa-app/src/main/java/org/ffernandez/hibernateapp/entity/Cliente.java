@@ -2,6 +2,9 @@ package org.ffernandez.hibernateapp.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "clientes") // nombre de la tabla en la base de datos
 public class Cliente {
@@ -13,6 +16,12 @@ public class Cliente {
     private String apellido;
     @Column(name="forma_pago")
     private String formaPago;
+
+    @Column(name="creado_en")
+    private LocalDateTime creadoEn;
+
+    @Column(name="editado_en")
+    private LocalDateTime editadoEn;
 
     public Cliente() {
     }
@@ -27,6 +36,38 @@ public class Cliente {
         this.nombre = nombre;
         this.apellido = apellido;
         this.formaPago = formaPago;
+    }
+
+    @PrePersist // se ejecuta antes de persistir
+    public void prePersist() {
+        System.out.println("Inicializar algo antes de persistir");
+        this.creadoEn = LocalDateTime.now();
+    }
+
+    @PreUpdate // se ejecuta antes de actualizar
+    public void preUpdate() {
+        System.out.println("Inicializar algo antes de actualizar");
+        this.editadoEn = LocalDateTime.now();
+    }
+
+    @PreRemove // se ejecuta antes de eliminar
+    public void preRemove() {
+        System.out.println("Inicializar algo antes de eliminar");
+    }
+
+    @PostPersist // se ejecuta despues de persistir
+    public void postPersist() {
+        System.out.println("Algo despues de persistir");
+    }
+
+    @PostUpdate // se ejecuta despues de actualizar
+    public void postUpdate() {
+        System.out.println("Algo despues de actualizar");
+    }
+
+    @PostRemove // se ejecuta despues de eliminar
+    public void postRemove() {
+        System.out.println("Algo despues de eliminar");
     }
 
     public Long getId() {
@@ -61,11 +102,29 @@ public class Cliente {
         this.formaPago = formaPago;
     }
 
+    public LocalDateTime getCreadoEn() {
+        return creadoEn;
+    }
+
+    public void setCreadoEn(LocalDateTime creadoEn) {
+        this.creadoEn = creadoEn;
+    }
+
+    public LocalDateTime getEditadoEn() {
+        return editadoEn;
+    }
+
+    public void setEditadoEn(LocalDateTime editadoEn) {
+        this.editadoEn = editadoEn;
+    }
+
     @Override
     public String toString() {
         return "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", formaPago=" + formaPago;
+                ", formaPago=" + formaPago + '\'' +
+                ", creadoEn=" + creadoEn + '\'' +
+                ", editadoEn=" + editadoEn;
     }
 }
