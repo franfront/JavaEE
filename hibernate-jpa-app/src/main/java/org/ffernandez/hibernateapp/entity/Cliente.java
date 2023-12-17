@@ -17,11 +17,8 @@ public class Cliente {
     @Column(name="forma_pago")
     private String formaPago;
 
-    @Column(name="creado_en")
-    private LocalDateTime creadoEn;
-
-    @Column(name="editado_en")
-    private LocalDateTime editadoEn;
+    @Embedded // conecta con la clase Embeddable
+    private Auditoria audit = new Auditoria();
 
     public Cliente() {
     }
@@ -38,17 +35,7 @@ public class Cliente {
         this.formaPago = formaPago;
     }
 
-    @PrePersist // se ejecuta antes de persistir
-    public void prePersist() {
-        System.out.println("Inicializar algo antes de persistir");
-        this.creadoEn = LocalDateTime.now();
-    }
 
-    @PreUpdate // se ejecuta antes de actualizar
-    public void preUpdate() {
-        System.out.println("Inicializar algo antes de actualizar");
-        this.editadoEn = LocalDateTime.now();
-    }
 
     @PreRemove // se ejecuta antes de eliminar
     public void preRemove() {
@@ -102,29 +89,21 @@ public class Cliente {
         this.formaPago = formaPago;
     }
 
-    public LocalDateTime getCreadoEn() {
-        return creadoEn;
-    }
 
-    public void setCreadoEn(LocalDateTime creadoEn) {
-        this.creadoEn = creadoEn;
-    }
-
-    public LocalDateTime getEditadoEn() {
-        return editadoEn;
-    }
-
-    public void setEditadoEn(LocalDateTime editadoEn) {
-        this.editadoEn = editadoEn;
-    }
 
     @Override
     public String toString() {
+
+        LocalDateTime creado = this.audit != null ? this.audit.getCreadoEn() : null;
+        LocalDateTime editado = this.audit != null ? this.audit.getEditadoEn() : null;
+
+
+
         return "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", formaPago=" + formaPago + '\'' +
-                ", creadoEn=" + creadoEn + '\'' +
-                ", editadoEn=" + editadoEn;
+                ", creadoEn=" + creado + '\'' +
+                ", editadoEn=" + editado;
     }
 }
