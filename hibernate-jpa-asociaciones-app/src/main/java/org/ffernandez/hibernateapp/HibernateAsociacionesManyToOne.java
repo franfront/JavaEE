@@ -24,6 +24,7 @@ public class HibernateAsociacionesManyToOne {
             em.persist(factura);
 
 
+            System.out.println("Factura: " + factura.getCliente());
             em.getTransaction().commit();
 
         } catch (Exception e){
