@@ -26,6 +26,7 @@ public class Cliente {
     //cascade = CascadeType.ALL -> todas las operaciones que se hagan sobre el cliente se haran sobre las direcciones
     //orphanRemoval = true -> si se elimina un cliente se eliminan todas las direcciones asociadas
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_cliente") //
     private List<Direccion> direcciones;
 
     public Cliente() {
