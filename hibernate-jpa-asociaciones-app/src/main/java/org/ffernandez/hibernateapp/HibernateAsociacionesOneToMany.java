@@ -29,6 +29,17 @@ public class HibernateAsociacionesOneToMany {
 
             em.getTransaction().commit();
 
+            System.out.println("Cliente: " + cliente);
+
+            em.getTransaction().begin(); // nueva transaccion para eliminar
+
+            cliente = em.find(Cliente.class, cliente.getId());
+
+            cliente.getDirecciones().remove(d1);
+            em.getTransaction().commit();
+
+            System.out.println("Cliente: " + cliente);
+
 
 
         } catch (Exception e){

@@ -26,7 +26,12 @@ public class Cliente {
     //cascade = CascadeType.ALL -> todas las operaciones que se hagan sobre el cliente se haran sobre las direcciones
     //orphanRemoval = true -> si se elimina un cliente se eliminan todas las direcciones asociadas
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_cliente") //
+    //@JoinColumn(name = "id_cliente")
+    @JoinTable(name= "tbl_clientes_direcciones", // nombre de la tabla intermedia
+            joinColumns = @JoinColumn(name = "id_cliente"), // fk nombre de la columna que hace referencia a la tabla actual
+            inverseJoinColumns = @JoinColumn(name = "id_direccion"), // nombre de la columna que hace referencia a la tabla de la otra entidad
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_direccion"})} // cada campo unico
+    )
     private List<Direccion> direcciones;
 
     public Cliente() {
