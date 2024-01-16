@@ -34,9 +34,17 @@ public class Cliente {
     )
     private List<Direccion> direcciones;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+    private List<Factura> facturas;
+
+
+
     public Cliente() {
+        facturas = new ArrayList<>();
         direcciones = new ArrayList<>();
     }
+
+
 
     public Cliente(String nombre, String apellido) {
         this();
@@ -114,6 +122,27 @@ public class Cliente {
         this.direcciones = direcciones;
     }
 
+    public Auditoria getAudit() {
+        return audit;
+    }
+
+    public void setAudit(Auditoria audit) {
+        this.audit = audit;
+    }
+
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+    public void addFactura(Factura factura) {
+        this.facturas.add(factura);
+        factura.setCliente(this);
+    }
+
     @Override
     public String toString() {
 
@@ -129,6 +158,7 @@ public class Cliente {
                 ", creadoEn=" + creado + '\'' +
                 ", editadoEn=" + editado + '\'' +
                 ", direcciones=" + direcciones + '\'' +
+                ", facturas=" + facturas +
                 '}';
     }
 }
