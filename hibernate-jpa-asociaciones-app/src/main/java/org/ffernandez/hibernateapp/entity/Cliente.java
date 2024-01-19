@@ -142,6 +142,11 @@ public class Cliente {
         this.facturas.add(factura);
         factura.setCliente(this);
     }
+    public void removeFactura(Factura factura) {
+        this.facturas.remove(factura);
+        factura.setCliente(null);
+
+    }
 
     @Override
     public String toString() {
@@ -161,4 +166,5 @@ public class Cliente {
                 ", facturas=" + facturas +
                 '}';
     }
+
 }
