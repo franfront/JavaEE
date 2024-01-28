@@ -37,6 +37,10 @@ public class Cliente {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
     private List<Factura> facturas;
 
+    @OneToOne
+    @JoinColumn(name = "cliente_detalle_id")
+    private ClienteDetalle detalle;
+
 
 
     public Cliente() {
@@ -80,6 +84,15 @@ public class Cliente {
     @PostRemove // se ejecuta despues de eliminar
     public void postRemove() {
         System.out.println("Algo despues de eliminar");
+    }
+
+
+    public ClienteDetalle getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(ClienteDetalle detalle) {
+        this.detalle = detalle;
     }
 
     public Long getId() {
@@ -164,6 +177,7 @@ public class Cliente {
                 ", editadoEn=" + editado + '\'' +
                 ", direcciones=" + direcciones + '\'' +
                 ", facturas=" + facturas +
+                ", detalle=" + detalle +
                 '}';
     }
 
