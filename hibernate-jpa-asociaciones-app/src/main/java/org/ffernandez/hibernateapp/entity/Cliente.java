@@ -37,8 +37,7 @@ public class Cliente {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
     private List<Factura> facturas;
 
-    @OneToOne
-    @JoinColumn(name = "cliente_detalle_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
     private ClienteDetalle detalle;
 
 
