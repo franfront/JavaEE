@@ -94,6 +94,18 @@ public class Cliente {
         this.detalle = detalle;
     }
 
+    public void addDetalle(ClienteDetalle detalle) {
+
+        this.detalle = detalle;
+        detalle.setCliente(this);
+    }
+
+    public void removeDetalle() {
+
+        detalle.setCliente(null);
+        this.detalle = null;
+    }
+
     public Long getId() {
         return id;
     }

@@ -5,7 +5,7 @@ import org.ffernandez.hibernateapp.entity.Cliente;
 import org.ffernandez.hibernateapp.entity.ClienteDetalle;
 import org.ffernandez.hibernateapp.util.JpaUtil;
 
-public class HibernateAsociacionesOneToOneBidireccional {
+public class HibernateAsociacionesOneToOneBidireccionalFind {
     public static void main(String[] args) {
 
         EntityManager em = JpaUtil.getEntityManager();
@@ -13,14 +13,12 @@ public class HibernateAsociacionesOneToOneBidireccional {
         try{
             em.getTransaction().begin();
 
-            Cliente cliente = new Cliente("Homero", "Thompson");
-            cliente.setFormaPago("debito");
+            Cliente cliente = em.find(Cliente.class, 6L);
 
             ClienteDetalle detalle = new ClienteDetalle(true, 8000L);
 
             cliente.addDetalle(detalle);
 
-            em.persist(cliente);
             em.getTransaction().commit();
             System.out.println("Cliente: " + cliente);
 
