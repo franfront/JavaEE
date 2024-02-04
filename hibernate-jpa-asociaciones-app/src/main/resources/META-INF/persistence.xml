@@ -6,6 +6,8 @@
         <class>org.ffernandez.hibernateapp.entity.Factura</class>
         <class>org.ffernandez.hibernateapp.entity.Direccion</class>
         <class>org.ffernandez.hibernateapp.entity.ClienteDetalle</class>
+        <class>org.ffernandez.hibernateapp.entity.Curso</class>
+        <class>org.ffernandez.hibernateapp.entity.Alumno</class>
 <!--    excluye las clases no listadas     -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
