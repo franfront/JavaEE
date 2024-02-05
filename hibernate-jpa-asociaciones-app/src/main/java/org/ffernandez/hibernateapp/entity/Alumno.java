@@ -21,6 +21,10 @@ public class Alumno {
 
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // para que no se borren los cursos al borrar un alumno
+    @JoinTable(name = "tbl_alumnos_cursos",
+            joinColumns = @JoinColumn(name = "alumno_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"alumno_id","curso_id"}))
     private List<Curso> cursos;
 
     public Alumno() {
