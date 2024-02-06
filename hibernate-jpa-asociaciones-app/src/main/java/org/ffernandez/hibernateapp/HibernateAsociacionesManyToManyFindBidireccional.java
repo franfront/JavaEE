@@ -5,7 +5,7 @@ import org.ffernandez.hibernateapp.entity.Alumno;
 import org.ffernandez.hibernateapp.entity.Curso;
 import org.ffernandez.hibernateapp.util.JpaUtil;
 
-public class HibernateAsociacionesManyToMany {
+public class HibernateAsociacionesManyToManyFindBidireccional {
     public static void main(String[] args) {
 
         EntityManager em = JpaUtil.getEntityManager();
@@ -13,24 +13,21 @@ public class HibernateAsociacionesManyToMany {
         try{
             em.getTransaction().begin();
 
-            Alumno alumno1 = new Alumno("Marge", "Simpson");
-            Alumno alumno2 = new Alumno("Bart", "Simpson");
-            Alumno alumno3 = new Alumno("Lisa", "Simpson");
+            Alumno alumno1 = em.find(Alumno.class, 1L);
+            Alumno alumno2 = em.find(Alumno.class, 2L);
+            Alumno alumno3 = em.find(Alumno.class, 3L);
 
 
-            Curso curso1 = new Curso("Curso Java", "Andres");
-            Curso curso2 = new Curso("Curso Hibernate", "Andres");
+            Curso curso1 = em.find(Curso.class, 1L); //new Curso("Curso Java", "Andres");
+            Curso curso2 = em.find(Curso.class, 2L); //new Curso("Curso Hibernate", "Andres");
 
-            alumno1.getCursos().add(curso1);
-            alumno1.getCursos().add(curso2);
+            alumno1.addCurso(curso1);
+            alumno1.addCurso(curso2);
 
-            alumno2.getCursos().add(curso1);
+            alumno2.addCurso(curso1);
 
-            alumno3.getCursos().add(curso2);
+            alumno3.addCurso(curso2);
 
-            em.persist(alumno1);
-            em.persist(alumno2);
-            em.persist(alumno3);
 
 
 
@@ -42,8 +39,10 @@ public class HibernateAsociacionesManyToMany {
 
             em.getTransaction().begin();
 
-            Curso c2 = em.find(Curso.class, 3L);
-            alumno1.getCursos().remove(c2);
+
+            Curso c2 = new Curso("Curso Java EE 9", "Andres");
+            c2.setId(2L);
+            alumno1.removeCurso(c2);
 
             em.getTransaction().commit();
             System.out.println("Alumno: " + alumno1);
