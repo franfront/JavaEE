@@ -4,3 +4,7 @@ INSERT INTO alumnos (id, nombre, apellido) VALUES (2, 'Bart', 'Simpson');
 INSERT INTO alumnos (id, nombre, apellido) VALUES (3, 'Lisa', 'Simpson');
 INSERT INTO cursos (id, titulo, profesor) VALUES (1, 'Curso Spring', 'Andres');
 INSERT INTO cursos (id, titulo, profesor) VALUES (2, 'Curso Java EE 9', 'Andres');
+INSERT INTO direcciones(calle, numero values ('Av. Siempreviva', 742);
+INSERT INTO direcciones(calle, numero values ('Av. popo de perro', 782);
+INSERT INTO tbl_clientes_direcciones(id_cliente, id_direccion) VALUES (1, 1);
+INSERT INTO tbl_clientes_direcciones(id_cliente, id_direccion) VALUES (1, 2);
