@@ -25,6 +25,8 @@ public class Cliente {
 
     //cascade = CascadeType.ALL -> todas las operaciones que se hagan sobre el cliente se haran sobre las direcciones
     //orphanRemoval = true -> si se elimina un cliente se eliminan todas las direcciones asociadas
+    // fetch = FetchType.LAZY -> carga perezosa, carga las direcciones solo cuando se necesiten
+    // fetch = FetchType.EAGER -> carga ansiosa, carga las direcciones siempre
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     //@JoinColumn(name = "id_cliente")
     @JoinTable(name= "tbl_clientes_direcciones", // nombre de la tabla intermedia

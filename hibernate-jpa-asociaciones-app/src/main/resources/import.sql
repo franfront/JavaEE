@@ -8,3 +8,4 @@ INSERT INTO direcciones(calle, numero) VALUES ('Av. Siempreviva', 742);
 INSERT INTO direcciones(calle, numero) VALUES  ('Av. popo de perro', 782);
 INSERT INTO tbl_clientes_direcciones(id_cliente, id_direccion) VALUES (1, 1);
 INSERT INTO tbl_clientes_direcciones(id_cliente, id_direccion) VALUES (1, 2);
+insert into clientes_detalles(prime, puntos_acumulados, cliente_detalle_id) values (true, 1000, 1);
