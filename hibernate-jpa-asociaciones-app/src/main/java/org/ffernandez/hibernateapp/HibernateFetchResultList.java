@@ -12,7 +12,7 @@ public class HibernateFetchResultList {
         EntityManager em = JpaUtil.getEntityManager();
 
         // trae todos los clientes y sus direcciones a la vez, en vez de hacer una consulta por cada cliente
-        List<Cliente> clientes = em.createQuery("select distinct c from Cliente c left outer join fetch c.direcciones left outer join fetch c.detalle ", Cliente.class)
+        List<Cliente> clientes = em.createQuery("select distinct c from Cliente c left outer join fetch c.direcciones left outer join fetch c.facturas left outer join fetch c.detalle ", Cliente.class)
                 .getResultList();
 
         clientes.forEach(c -> System.out.println(c.getNombre() + ", direcciones: " + c.getDirecciones()) );
