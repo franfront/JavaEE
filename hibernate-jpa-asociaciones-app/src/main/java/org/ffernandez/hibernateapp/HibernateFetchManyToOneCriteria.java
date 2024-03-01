@@ -22,6 +22,8 @@ public class HibernateFetchManyToOneCriteria {
 
         List<Factura> facturas = em.createQuery(query).getResultList();
 
+        facturas.forEach(f -> System.out.println(f.getDescripcion() + ", cliente: " + f.getCliente().getNombre()));
+
 
         em.close();
 
