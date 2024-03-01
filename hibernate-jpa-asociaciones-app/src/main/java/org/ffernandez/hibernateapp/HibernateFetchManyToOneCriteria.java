@@ -9,7 +9,7 @@ import org.ffernandez.hibernateapp.util.JpaUtil;
 
 import java.util.List;
 
-public class HibernateFetcgManyToOneCriteria {
+public class HibernateFetchManyToOneCriteria {
     public static void main(String[] args) {
 
         EntityManager em = JpaUtil.getEntityManager();
