@@ -1,10 +1,8 @@
 package org.ffernandez.apiservlet.webapp.headers.services;
 
-import jakarta.enterprise.inject.Alternative;
-import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
-import org.ffernandez.apiservlet.webapp.headers.models.Producto;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Categoria;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Producto;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

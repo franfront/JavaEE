@@ -1,12 +1,10 @@
 package org.ffernandez.apiservlet.webapp.headers.services;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
 import org.ffernandez.apiservlet.webapp.headers.configs.Service;
-import org.ffernandez.apiservlet.webapp.headers.interceptors.Logging;
-import org.ffernandez.apiservlet.webapp.headers.models.Categoria;
-import org.ffernandez.apiservlet.webapp.headers.models.Producto;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Categoria;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Producto;
 import org.ffernandez.apiservlet.webapp.headers.repositories.CrudRepository;
 
 

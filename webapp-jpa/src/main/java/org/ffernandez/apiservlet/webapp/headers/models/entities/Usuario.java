@@ -1,9 +1,17 @@
-package org.ffernandez.apiservlet.webapp.headers.models;
+package org.ffernandez.apiservlet.webapp.headers.models.entities;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-    private Long id;
-    private String username;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String username;
     private String password;
     private String email;
 

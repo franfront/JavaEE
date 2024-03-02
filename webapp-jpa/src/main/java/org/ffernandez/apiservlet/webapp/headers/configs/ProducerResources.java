@@ -1,19 +1,26 @@
 package org.ffernandez.apiservlet.webapp.headers.configs;
 
+import org.ffernandez.apiservlet.webapp.headers.util.JpaUtil;
+
 import jakarta.annotation.Resource;
+
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
+
+import jakarta.persistence.EntityManager;
+
 
 import javax.naming.NamingException;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -48,6 +55,19 @@ public class ProducerResources {
     public void close(@Disposes @MysqlConn Connection conn) throws SQLException {
         conn.close();
         log.info("Cerrando conexion");
+    }
+
+    @Produces
+    @RequestScoped
+    private EntityManager beanEntityManager(){
+        return JpaUtil.getEntityManagerFactory().createEntityManager();
+    }
+
+    public void close(@Disposes EntityManager em){
+        if(em.isOpen()){
+            em.close();
+            log.info("Cerrando la conexion del EntityManager");
+        }
     }
 
 }

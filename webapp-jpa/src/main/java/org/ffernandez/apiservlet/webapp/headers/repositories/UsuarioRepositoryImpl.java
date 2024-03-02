@@ -3,7 +3,7 @@ package org.ffernandez.apiservlet.webapp.headers.repositories;
 import jakarta.inject.Inject;
 import org.ffernandez.apiservlet.webapp.headers.configs.MysqlConn;
 import org.ffernandez.apiservlet.webapp.headers.configs.Repository;
-import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

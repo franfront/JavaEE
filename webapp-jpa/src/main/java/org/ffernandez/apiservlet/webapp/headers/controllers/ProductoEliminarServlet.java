@@ -1,19 +1,16 @@
 package org.ffernandez.apiservlet.webapp.headers.controllers;
 
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
-import org.ffernandez.apiservlet.webapp.headers.models.Producto;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Producto;
 import org.ffernandez.apiservlet.webapp.headers.services.ProductoService;
-import org.ffernandez.apiservlet.webapp.headers.services.ProductoServiceJdbcImpl;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet("/productos/eliminar")

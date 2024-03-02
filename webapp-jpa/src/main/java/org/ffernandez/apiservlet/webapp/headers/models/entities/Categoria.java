@@ -1,7 +1,13 @@
-package org.ffernandez.apiservlet.webapp.headers.models;
+package org.ffernandez.apiservlet.webapp.headers.models.entities;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "categorias")
 public class Categoria {
     private Long id;
+
     private String nombre;
 
     public Long getId() {

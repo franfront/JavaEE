@@ -4,15 +4,12 @@ import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario;
 import org.ffernandez.apiservlet.webapp.headers.services.LoginService;
-import org.ffernandez.apiservlet.webapp.headers.services.LoginServiceSessionImpl;
 import org.ffernandez.apiservlet.webapp.headers.services.UsuarioService;
-import org.ffernandez.apiservlet.webapp.headers.services.UsuarioServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet({"/login", "/login.html"})

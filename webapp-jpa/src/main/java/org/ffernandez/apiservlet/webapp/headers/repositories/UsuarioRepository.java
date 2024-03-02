@@ -1,6 +1,6 @@
 package org.ffernandez.apiservlet.webapp.headers.repositories;
 
-import org.ffernandez.apiservlet.webapp.headers.models.Usuario;
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario;
 
 import java.sql.SQLException;
 

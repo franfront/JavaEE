@@ -1,5 +1,7 @@
 package org.ffernandez.apiservlet.webapp.headers.models;
 
+import org.ffernandez.apiservlet.webapp.headers.models.entities.Producto;
+
 import java.util.Objects;
 
 public class ItemCarro {
