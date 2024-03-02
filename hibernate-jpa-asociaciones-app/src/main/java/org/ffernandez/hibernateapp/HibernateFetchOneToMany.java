@@ -3,6 +3,7 @@ package org.ffernandez.hibernateapp;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 import org.ffernandez.hibernateapp.entity.Cliente;
 import org.ffernandez.hibernateapp.util.JpaUtil;
@@ -19,11 +20,14 @@ public class HibernateFetchOneToMany {
 
         Root<Cliente> cliente = query.from(Cliente.class);
 
-        query.select(cliente);
+        cliente.fetch("direcciones", JoinType.LEFT);
+        cliente.fetch("detalle", JoinType.LEFT);
+        query.select(cliente).distinct(true);
 
         List<Cliente> clientes = em.createQuery(query).getResultList();
 
-        clientes.forEach(c -> System.out.println(c.getNombre() + ", direcciones: " + c.getDirecciones()));
+        clientes.forEach(c -> System.out.println(c.getNombre()  + ", detalle: " + c.getDetalle() + ", direcciones: " + c.getDirecciones()));
+
 
 
 
