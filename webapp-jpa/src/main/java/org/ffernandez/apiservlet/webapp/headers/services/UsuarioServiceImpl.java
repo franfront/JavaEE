@@ -25,7 +25,7 @@ public class UsuarioServiceImpl implements  UsuarioService {
             return Optional.ofNullable(usuarioRepository.porUsername(username))
                     .filter(u-> u.getPassword().equals(password));
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e);
         }
     }

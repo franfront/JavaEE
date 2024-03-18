@@ -27,7 +27,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     public List<Producto> listarProductos() {
         try {
             return repojdbc.listar();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
         }
     }
@@ -37,7 +37,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     public Optional<Producto> porId(Long id) {
         try {
             return Optional.ofNullable(repojdbc.porId(id));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
 
         }
@@ -47,7 +47,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     public void guardar(Producto producto) {
         try {
             repojdbc.guardar(producto);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
         }
 
@@ -57,7 +57,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     public void eliminar(Long id) {
         try {
             repojdbc.eliminar(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
         }
 
@@ -68,7 +68,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
 
         try {
             return repoCateogriajdbc.listar();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
 
         }
@@ -78,7 +78,7 @@ public class ProductoServiceJdbcImpl implements ProductoService{
     public Optional<Categoria> porIdCategoria(Long id) {
         try {
             return Optional.ofNullable(repoCateogriajdbc.porId(id));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServiceJdbcException(e.getMessage(), e.getCause());
 
         }
