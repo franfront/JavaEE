@@ -23,11 +23,17 @@ public class CategoriaRepositoryJpaImpl implements CrudRepository<Categoria> {
 
     @Override
     public void guardar(Categoria categoria) throws Exception {
+        if(categoria.getId() != null && categoria.getId() > 0){
+            em.merge(categoria);
+        } else{
+            em.persist(categoria);
+        }
 
     }
 
     @Override
     public void eliminar(Long id) throws Exception {
+        em.remove(porId(id));
 
     }
 }
