@@ -1,47 +1,90 @@
 package org.ffernandez.apiservlet.webapp.headers.services;
 
+import jakarta.inject.Inject;
+import org.ffernandez.apiservlet.webapp.headers.configs.ProductoServicesPrin;
+import org.ffernandez.apiservlet.webapp.headers.configs.Service;
+import org.ffernandez.apiservlet.webapp.headers.interceptors.TransactionalJpa;
 import org.ffernandez.apiservlet.webapp.headers.models.entities.Categoria;
 import org.ffernandez.apiservlet.webapp.headers.models.entities.Producto;
+import org.ffernandez.apiservlet.webapp.headers.repositories.CrudRepository;
+import org.ffernandez.apiservlet.webapp.headers.repositories.RepositoryJpa;
 
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@ProductoServicesPrin
+@TransactionalJpa
+public class ProductoServiceImpl implements ProductoService{
+
+    @Inject
+    @RepositoryJpa
+    private CrudRepository<Producto> repojdbc;
+
+    @Inject
+    @RepositoryJpa
+    private CrudRepository<Categoria> repoCateogriajdbc;
 
 
-public class  ProductoServiceImpl implements ProductoService {
     @Override
     public List<Producto> listarProductos() {
-        return Arrays.asList(new Producto(1L, "notebook", "computación", 200000),
-                new Producto(2L, "mesa escritorio", "oficina", 150000),
-                new Producto(3L, "teclado", "computación", 20000),
-                new Producto(4L, "silla de oficina", "oficina", 100000));
+        try {
+            return repojdbc.listar();
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
+
     public Optional<Producto> porId(Long id) {
-        return listarProductos().stream()
-                .filter(producto -> producto.getId().equals(id))
-                .findAny();
+        try {
+            return Optional.ofNullable(repojdbc.porId(id));
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+
+        }
     }
 
     @Override
     public void guardar(Producto producto) {
+        try {
+            repojdbc.guardar(producto);
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+        }
 
     }
 
     @Override
     public void eliminar(Long id) {
+        try {
+            repojdbc.eliminar(id);
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+        }
 
     }
 
     @Override
     public List<Categoria> listarCategoria() {
-        return null;
+
+        try {
+            return repoCateogriajdbc.listar();
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+
+        }
     }
 
     @Override
     public Optional<Categoria> porIdCategoria(Long id) {
-        return Optional.empty();
+        try {
+            return Optional.ofNullable(repoCateogriajdbc.porId(id));
+        } catch (Exception e) {
+            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+
+        }
     }
 }

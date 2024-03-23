@@ -10,6 +10,9 @@
         <class>
             org.ffernandez.apiservlet.webapp.headers.interceptors.TransactionalInterceptor
         </class>
+        <class>
+            org.ffernandez.apiservlet.webapp.headers.interceptors.TransactionalJpaInterceptor
+        </class>
     </interceptors>
 
 </beans>

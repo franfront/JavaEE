@@ -2,20 +2,23 @@ package org.ffernandez.apiservlet.webapp.headers.services;
 
 import jakarta.inject.Inject;
 import org.ffernandez.apiservlet.webapp.headers.configs.Service;
+import org.ffernandez.apiservlet.webapp.headers.interceptors.TransactionalJpa;
 import org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario;
+import org.ffernandez.apiservlet.webapp.headers.repositories.RepositoryJpa;
 import org.ffernandez.apiservlet.webapp.headers.repositories.UsuarioRepository;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
 @Service
+@TransactionalJpa
 public class UsuarioServiceImpl implements  UsuarioService {
 
 
     private UsuarioRepository usuarioRepository;
 
     @Inject
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl( @RepositoryJpa UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 

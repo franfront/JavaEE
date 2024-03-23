@@ -13,6 +13,7 @@ import java.util.List;
 
 
 @Repository
+@RepositoryJdbc
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Inject

@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 //@ApplicationScoped para que se cree una sola instancia de esta clase
 @Repository
+@RepositoryJdbc
 public class ProductoRepositoyJdbcImpl implements CrudRepository<Producto> {
 
     @Inject

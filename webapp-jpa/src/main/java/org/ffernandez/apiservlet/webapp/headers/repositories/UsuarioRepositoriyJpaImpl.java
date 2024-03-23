@@ -2,14 +2,19 @@ package org.ffernandez.apiservlet.webapp.headers.repositories;
 
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import org.ffernandez.apiservlet.webapp.headers.configs.Repository;
 import org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario;
 
 import java.util.List;
 
+
+@RepositoryJpa
+@Repository
 public class UsuarioRepositoriyJpaImpl implements UsuarioRepository {
 
     @Inject
     private EntityManager em;
+
     @Override
     public List<Usuario> listar() throws Exception {
         return em.createQuery("from Usuario", Usuario.class).getResultList();
