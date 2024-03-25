@@ -109,7 +109,7 @@ public class ProductoFormServlet extends HttpServlet {
         try{
             id = Long.valueOf(req.getParameter("id"));
         } catch (NumberFormatException e) {
-            id = 0L;
+            id = null;
         }
 
         Producto producto = new Producto();

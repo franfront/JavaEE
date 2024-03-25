@@ -7,7 +7,7 @@
         <class>org.ffernandez.apiservlet.webapp.headers.models.entities.Usuario</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/java_hibernate_curso"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/java_curso"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="prueba02"/>

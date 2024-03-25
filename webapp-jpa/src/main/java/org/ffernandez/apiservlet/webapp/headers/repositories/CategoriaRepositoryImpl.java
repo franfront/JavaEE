@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Repository
 @RepositoryJdbc
+@Repository
 public class CategoriaRepositoryImpl implements CrudRepository<Categoria> {
 
 

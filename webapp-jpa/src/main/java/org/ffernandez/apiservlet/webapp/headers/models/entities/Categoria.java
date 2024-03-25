@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
+
+    @Id
     private Long id;
 
     private String nombre;

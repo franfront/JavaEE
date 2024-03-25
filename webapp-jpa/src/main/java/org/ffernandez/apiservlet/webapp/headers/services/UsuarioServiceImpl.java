@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements  UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Inject
-    public UsuarioServiceImpl( @RepositoryJpa UsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl(@RepositoryJpa UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
